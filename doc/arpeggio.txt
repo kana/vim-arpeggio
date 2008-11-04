@@ -1,0 +1,216 @@
+*arpeggio.txt*	Mappings for simultaneously pressed keys
+
+Version 0.0.0
+Copyright (C) 2008 kana <http://whileimautomaton.net/>
+License: MIT license  {{{
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be included
+    in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+}}}
+
+CONTENTS					*arpeggio-contents*
+
+Introduction		|arpeggio-introduction|
+Interface		|arpeggio-interface|
+  Commands		  |arpeggio-commands|
+  Functions		  |arpeggio-functions|
+  Mappings		  |arpeggio-mappings|
+  Variables		  |arpeggio-variables|
+Bugs			|arpeggio-bugs|
+Changelog		|arpeggio-changelog|
+
+
+
+
+==============================================================================
+INTRODUCTION					*arpeggio-introduction*
+
+*arpeggio* is a Vim plugin to define |key-mapping| for simultaneously pressed
+keys.  The concept of this plugin is derived from Emacs' key-chord.el:
+http://www.emacswiki.org/cgi-bin/wiki/key-chord.el
+
+Requirements:
+- Vim 7.2 or later
+
+
+
+
+==============================================================================
+INTERFACE					*arpeggio-interface*
+
+------------------------------------------------------------------------------
+COMMANDS					*arpeggio-commands*
+
+:Arpeggiomap {lhs} {rhs}			*:Arpeggiomap*
+:Arpeggiomap! {lhs} {rhs}			*:Arpeggiomap!*
+:Arpeggiocmap {lhs} {rhs}			*:Arpeggiocmap*
+:Arpeggioimap {lhs} {rhs}			*:Arpeggioimap*
+:Arpeggiolmap {lhs} {rhs}			*:Arpeggiolmap*
+:Arpeggionmap {lhs} {rhs}			*:Arpeggionmap*
+:Arpeggioomap {lhs} {rhs}			*:Arpeggioomap*
+:Arpeggiosmap {lhs} {rhs}			*:Arpeggiosmap*
+:Arpeggiovmap {lhs} {rhs}			*:Arpeggiovmap*
+:Arpeggioxmap {lhs} {rhs}			*:Arpeggioxmap*
+			Like |:map| and others, but map to {rhs} if and only
+			if all keys in {lhs} are simultaneously pressed.
+
+			Available |:map-arguments| are
+			<buffer> and/or <silent>.
+
+:Arpeggionoremap {lhs} {rhs}			*:Arpeggionoremap*
+:Arpeggionoremap! {lhs} {rhs}			*:Arpeggionoremap!*
+:Arpeggiocnoremap {lhs} {rhs}			*:Arpeggiocnoremap*
+:Arpeggioinoremap {lhs} {rhs}			*:Arpeggioinoremap*
+:Arpeggiolnoremap {lhs} {rhs}			*:Arpeggiolnoremap*
+:Arpeggionnoremap {lhs} {rhs}			*:Arpeggionnoremap*
+:Arpeggioonoremap {lhs} {rhs}			*:Arpeggioonoremap*
+:Arpeggiosnoremap {lhs} {rhs}			*:Arpeggiosnoremap*
+:Arpeggiovnoremap {lhs} {rhs}			*:Arpeggiovnoremap*
+:Arpeggioxnoremap {lhs} {rhs}			*:Arpeggioxnoremap*
+			Variants of |:Arpeggiomap| without remapping, like
+			|:noremap|.
+
+:Arpeggiounmap {lhs} {rhs}			*:Arpeggiounmap*
+:Arpeggiounmap! {lhs} {rhs}			*:Arpeggiounmap!*
+:Arpeggiocunmap {lhs} {rhs}			*:Arpeggiocunmap*
+:Arpeggioiunmap {lhs} {rhs}			*:Arpeggioiunmap*
+:Arpeggiolunmap {lhs} {rhs}			*:Arpeggiolunmap*
+:Arpeggionunmap {lhs} {rhs}			*:Arpeggionunmap*
+:Arpeggioounmap {lhs} {rhs}			*:Arpeggioounmap*
+:Arpeggiosunmap {lhs} {rhs}			*:Arpeggiosunmap*
+:Arpeggiovunmap {lhs} {rhs}			*:Arpeggiovunmap*
+:Arpeggioxunmap {lhs} {rhs}			*:Arpeggioxunmap*
+			Like |:unmap| and others, but remove key mappings
+			defined by |:Arpeggiomap| and/or others.
+
+:Arpeggiomap [{lhs}]				*:Arpeggiomap*
+:Arpeggiomap! [{lhs}]				*:Arpeggiomap!*
+:Arpeggiocmap [{lhs}]				*:Arpeggiocmap*
+:Arpeggioimap [{lhs}]				*:Arpeggioimap*
+:Arpeggiolmap [{lhs}]				*:Arpeggiolmap*
+:Arpeggionmap [{lhs}]				*:Arpeggionmap*
+:Arpeggioomap [{lhs}]				*:Arpeggioomap*
+:Arpeggiosmap [{lhs}]				*:Arpeggiosmap*
+:Arpeggiovmap [{lhs}]				*:Arpeggiovmap*
+:Arpeggioxmap [{lhs}]				*:Arpeggioxmap*
+			List key mappings which are defined by |:Arpeggiomap|
+			or others and which contain all keys in {lhs}.
+			If {lhs} is omitted, list all key mappings defined by
+			|:Arpeggiomap| or others.
+
+
+------------------------------------------------------------------------------
+FUNCTIONS					*arpeggio-functions*
+
+arpeggio#load()					*arpeggio#load()*
+			Load this plugin if it is not loaded yet.  Otherwise,
+			does nothing.  Call this function to ensure that
+			|arpeggio-commands| are defined before you use one of
+			them.
+
+arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
+			Function version of |:Arpeggiomap| and others.
+
+			modes ~
+				String.  Each character means a mode to define
+				the given key mapping.  See |map-listing| for
+				the meaning of character.
+
+			options ~
+				List of strings.  Each string is one of
+				|:map-arguments| such as <buffer>.
+
+			remap_p ~
+				Number as a boolean.  True means that rhs can
+				be remapped, false means remapping is not
+				allowed.
+
+			lhs ~
+				String.
+
+			rhs ~
+				String.
+
+arpeggio#unmap(modes, lhs)			*arpeggio#unmap()*
+			Function version of |:Arpeggiounmap| and others.
+			See |arpeggio#map()| for the details of arguments.
+
+
+------------------------------------------------------------------------------
+MAPPINGS					*arpeggio-mappings*
+
+In the following description, {X} means a character in {lhs} which are used
+for |:Arpeggiomap| and others.
+
+{X}
+			Mapped to internal stuffs.  Don't map {X} to anything.
+			To customize the action for solely typed {X}, use
+			|<Plug>(arpeggio-default:{X})| instead.
+
+<Plug>(arpeggio-default:{X})			*<Plug>(arpeggio-default:{X})*
+			Pseudo key sequence to customize the action whenever
+			{X} is typed solely.  By default, this key sequence is
+			mapped to {X} with no remapping.
+
+
+------------------------------------------------------------------------------
+VARIABLES					*arpeggio-variables*
+
+g:arpeggio_timeoutlen	number  (default 40)	*g:arpeggio_timeoutlen*
+			The time in milliseconds to determine whether typed
+			keys are simultaneously pressed or not.
+
+'timeout' 'ttimeout'
+			The following configuration is required to use this
+			plugin:
+>
+				set timeout
+				set nottimeout
+<
+			Note that the default values of these options are the
+			same as the above, so you don't have to configure them
+			unless you tweaked them.
+
+
+
+==============================================================================
+BUGS						*arpeggio-bugs*
+
+- {lhs} must consist of two characters.  This limitation will be removed for
+  the future.
+
+- {lhs} cannot contain a special key such as <Left>, because such keys are
+  represented by 2 or more characters.  This limitation will be removed for
+  the futhre.
+
+- There are many bugs around the world.
+
+
+
+
+==============================================================================
+CHANGELOG					*arpeggio-changelog*
+
+0.0.0	2008-11-04T15:53:03+09:00
+	- Initial version.
+
+
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:fdm=marker:
