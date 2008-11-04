@@ -252,6 +252,12 @@ endfunction
 
 
 " Misc.  "{{{2
+function! s:SID_PREFIX()  "{{{3
+ return matchstr(expand('<sfile>'), '<SNR>\d\+_')
+endfunction
+let s:SID_PREFIX = s:SID_PREFIX()
+
+
 function! s:each_char(s)  "{{{3
   return split(a:s, '.\zs')
 endfunction
