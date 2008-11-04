@@ -98,16 +98,16 @@ COMMANDS					*arpeggio-commands*
 			Like |:unmap| and others, but remove key mappings
 			defined by |:Arpeggiomap| and/or others.
 
-:Arpeggiomap [{lhs}]				*:Arpeggiomap*
-:Arpeggiomap! [{lhs}]				*:Arpeggiomap!*
-:Arpeggiocmap [{lhs}]				*:Arpeggiocmap*
-:Arpeggioimap [{lhs}]				*:Arpeggioimap*
-:Arpeggiolmap [{lhs}]				*:Arpeggiolmap*
-:Arpeggionmap [{lhs}]				*:Arpeggionmap*
-:Arpeggioomap [{lhs}]				*:Arpeggioomap*
-:Arpeggiosmap [{lhs}]				*:Arpeggiosmap*
-:Arpeggiovmap [{lhs}]				*:Arpeggiovmap*
-:Arpeggioxmap [{lhs}]				*:Arpeggioxmap*
+:Arpeggiomap [{lhs}]				*:Arpeggiomap_l*
+:Arpeggiomap! [{lhs}]				*:Arpeggiomap_l!*
+:Arpeggiocmap [{lhs}]				*:Arpeggiocmap_l*
+:Arpeggioimap [{lhs}]				*:Arpeggioimap_l*
+:Arpeggiolmap [{lhs}]				*:Arpeggiolmap_l*
+:Arpeggionmap [{lhs}]				*:Arpeggionmap_l*
+:Arpeggioomap [{lhs}]				*:Arpeggioomap_l*
+:Arpeggiosmap [{lhs}]				*:Arpeggiosmap_l*
+:Arpeggiovmap [{lhs}]				*:Arpeggiovmap_l*
+:Arpeggioxmap [{lhs}]				*:Arpeggioxmap_l*
 			List key mappings which are defined by |:Arpeggiomap|
 			or others and which contain all keys in {lhs}.
 			If {lhs} is omitted, list all key mappings defined by
