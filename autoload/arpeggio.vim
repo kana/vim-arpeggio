@@ -66,7 +66,7 @@ if !exists('g:arpeggio_timeoutlen')
   let g:arpeggio_timeoutlen = 40
 endif
 
-let s:original_timeoutlen = 0  " See s:chord_cancel() and s:chord_key().
+let s:original_timeoutlen = 0  " See s:set_up_options() & s:restore_options().
 
 
 
@@ -161,7 +161,7 @@ endfunction
 
 " Misc.  "{{ {1
 function! s:chord_cancel(key)  "{{{2
-  let &timeoutlen = s:original_timeoutlen
+  call s:restore_options()
   return "\<Plug>(arpeggio-default:" . a:key . ')'
 endfunction
 
@@ -169,8 +169,7 @@ endfunction
 
 
 function! s:chord_key(key)  "{{{2
-  let s:original_timeoutlen = &timeoutlen
-  let &timeoutlen = g:arpeggio_timeoutlen
+  call s:set_up_options()
   return s:SID . 'work:' . a:key  " <SID>work:...
 endfunction
 
@@ -178,7 +177,7 @@ endfunction
 
 
 function! s:chord_success(keys)  "{{{2
-  let &timeoutlen = s:original_timeoutlen
+  call s:restore_options()
   return s:SID . 'success:' . a:keys  " <SID>success:...
 endfunction
 
@@ -275,6 +274,19 @@ function! s:each_combination(keys)  "{{{3
     endfor
     return _
   endif
+endfunction
+
+
+function! s:restore_options()  "{{{3
+  let &timeoutlen = s:original_timeoutlen
+  return
+endfunction
+
+
+function! s:set_up_options()  "{{{3
+  let s:original_timeoutlen = &timeoutlen
+  let &timeoutlen = g:arpeggio_timeoutlen
+  return
 endfunction
 
 
