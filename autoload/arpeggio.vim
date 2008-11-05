@@ -152,9 +152,16 @@ endfunction
 
 
 function! arpeggio#unmap(modes, options, lhs)  "{{{2
+  let v:errmsg = ''
+
   for mode in s:each_char(a:modes)
     call s:unmap(mode, a:options, s:split_to_keys(a:lhs))
   endfor
+
+  if v:errmsg != ''
+    echoerr v:errmsg
+  endif
+  return v:errmsg == ''
 endfunction
 
 
@@ -321,16 +328,17 @@ function! s:unmap(mode, options, keys)  "{{{2
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
   for key in a:keys
-    execute printf('%sunmap %s %s',
-    \              a:mode, opt_buffer, key)
+    silent! execute printf('%sunmap %s %s',
+    \                      a:mode, opt_buffer, key)
   endfor
 
   for combo in s:permutations(a:keys, len(a:keys))
-    execute printf('%sunmap %s <SID>success:%s',
-    \              a:mode,
-    \              s:to_map_arguments(a:options),
-    \              combo)
+    silent! execute printf('%sunmap %s <SID>success:%s',
+    \                      a:mode,
+    \                      s:to_map_arguments(a:options),
+    \                      combo)
   endfor
+
   return
 endfunction
 
