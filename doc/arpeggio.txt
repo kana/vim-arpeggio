@@ -127,13 +127,24 @@ arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
 			Function version of |:Arpeggiomap| and others.
 
 			modes ~
-				String.  Each character means a mode to define
-				the given key mapping.  See |map-listing| for
-				the meaning of character.
+				String.  Each character means one or more
+				modes to define the given key mapping.  "n"
+				means Normal mode, "v" means Visual mode and
+				Select mode (the same as what |:vmap| does),
+				and so forth.
 
 			options ~
-				List of strings.  Each string is one of
-				|:map-arguments| such as <buffer>.
+				String.  Each character means one of
+				|:map-arguments|.  The meanings of characters
+				are as follows:
+
+				Char	Meaning ~
+				b	<buffer>
+				e	<expr>
+				s	<silent>
+
+				Other |:map-arguments| are not supported for
+				arpeggio key mappings.
 
 			remap_p ~
 				Number as a boolean.  True means that rhs can

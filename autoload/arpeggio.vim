@@ -222,7 +222,7 @@ endfunction
 
 function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
   " Assumption: Values in a:keys are <>-escaped, e.g., "<Tab>" not "\<Tab>".
-  let opt_buffer = 0 <= index(a:options, '<buffer>') ? '<buffer>' : ''
+  let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
   for key in a:keys
     execute printf('%smap <expr> %s %s  <SID>chord_key(%s)',
@@ -238,7 +238,10 @@ function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
     execute printf('%smap <expr> <SID>work:%s  <SID>chord_success(%s)',
     \              a:mode, combo, string(combo))
     execute printf('%s%smap %s <SID>success:%s  %s',
-    \              a:mode, a:remap_p ? '' : 'nore', join(a:options), combo,
+    \              a:mode,
+    \              a:remap_p ? '' : 'nore',
+    \              s:to_map_arguments(a:options),
+    \              combo,
     \              a:rhs)
   endfor
   return
@@ -301,6 +304,12 @@ endfunction
 function! s:split_to_chars(lhs)  "{{{3
   " FIXME: Not perfect.
   return split(a:lhs, '\(<[^<>]\+>\|.\)\zs')
+endfunction
+
+
+function! s:to_map_arguments(options)  "{{{3
+  let _ = {'b': '<buffer>', 'e': '<expr>', 's': '<silent>'}
+  return join(map(s:each_char(a:options), '_[v:val]'))
 endfunction
 
 
