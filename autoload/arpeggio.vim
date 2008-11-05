@@ -133,8 +133,15 @@ lnoremap <SID>  <Nop>
 
 
 " Functions  "{{{1
-function! arpeggio#list(modes, options, lhs)  "{{{2
-  throw 'NIY'
+function! arpeggio#list(modes, options, ...)  "{{{2
+  let lhs = 1 <= a:0 ? a:1 : 0
+  let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
+
+  for mode in s:each_char(a:modes)
+    execute printf('%smap %s <SID>success:%s',
+    \              mode, opt_buffer, lhs is 0 ? '' : lhs)
+  endfor
+  return
 endfunction
 
 
