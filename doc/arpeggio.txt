@@ -70,7 +70,7 @@ COMMANDS					*arpeggio-commands*
 			if all keys in {lhs} are simultaneously pressed.
 
 			Available |:map-arguments| are
-			<buffer> and/or <silent>.
+			<buffer>, <expr> and/or <silent>.
 
 :Arpeggionoremap {lhs} {rhs}			*:Arpeggionoremap*
 :Arpeggionoremap! {lhs} {rhs}			*:Arpeggionoremap!*

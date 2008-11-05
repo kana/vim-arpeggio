@@ -225,16 +225,16 @@ function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
     execute printf('%smap <expr> %s  <SID>chord_key(%s)',
     \              a:mode, key, string(key))
       " be :silent! <unique> for 3 or more keys.
-    execute printf('%smap <expr> <SID>work:%s  <SID>chord_cancel(%s)'
+    execute printf('%smap <expr> <SID>work:%s  <SID>chord_cancel(%s)',
     \              a:mode, key, string(key))
     execute printf('silent! %snoremap <unique> <Plug>(arpeggio-default:%s) %s',
     \              a:mode, key, key)
   endfor
 
   for combo in s:each_combination(a:keys)
-    execute printf('%smap <expr> %s <SID>work:%s  <SID>chord_success(%s)',
-    \              a:mode, join(a:options), combo, string(combo))
-    execute printf('%s%smap <expr> %s <SID>success:%s  %s',
+    execute printf('%smap <expr> <SID>work:%s  <SID>chord_success(%s)',
+    \              a:mode, combo, string(combo))
+    execute printf('%s%smap %s <SID>success:%s  %s',
     \              a:mode, a:remap_p ? '' : 'nore', join(a:options), combo,
     \              a:rhs)
   endfor
