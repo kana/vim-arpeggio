@@ -1,6 +1,7 @@
 *arpeggio.txt*	Mappings for simultaneously pressed keys
 
 Version 0.0.0
+Script ID: 2425
 Copyright (C) 2008 kana <http://whileimautomaton.net/>
 License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
@@ -40,12 +41,36 @@ Changelog		|arpeggio-changelog|
 ==============================================================================
 INTRODUCTION					*arpeggio-introduction*
 
-*arpeggio* is a Vim plugin to define |key-mapping| for simultaneously pressed
-keys.  The concept of this plugin is derived from Emacs' key-chord.el:
-http://www.emacswiki.org/cgi-bin/wiki/key-chord.el
+*arpeggio* is a Vim plugin to define another type of |key-mapping| called as
+*arpeggio-key-mapping* which consists of 2 or more keys and it will be mapped
+to a key sequence whenever all keys are simultaneously pressed.  For example:
+>
+	Arpeggionoremap! jk  <Esc>
+	" OR
+	call arpeggio#map('ic', '', 0, 'jk', '<Esc>')
+<
+With the above definition, you can input <Esc> in Insert mode and Command-line
+mode by pressing "j" and "k" simultaneously, while solely pressed "j" are "k"
+are worked the same as the default ones.
+
+The concept of this plugin is derived from Emacs' key-chord.el (*), but there
+are the following differences:
+
+- Number of keys is unlimited.
+- "One-key chord" is not supported.  Because Vim natively supports it - see
+  |map-ambiguous| for the detail.
+
+(*) http://www.emacswiki.org/cgi-bin/wiki/key-chord.el
+
+Note that this is a beta version.  |arpeggio-commands| are not implemented
+yet.
+
 
 Requirements:
 - Vim 7.2 or later
+
+Latest version:
+http://github.com/kana/config/commits/vim-arpeggio
 
 
 
@@ -215,6 +240,11 @@ BUGS						*arpeggio-bugs*
   in short time, i.e., arpeggio.
 
   (*) http://en.wikipedia.org/wiki/Rollover_(key)
+
+- |arpeggio-key-mapping| may not be worked or may be conflicted with |@|
+  and/or |key-mapping|.  Because recorded key sequence doesn't have any
+  information about typing delay for each key.  So some keys may be treated as
+  an arpeggio key mapping unexpectedly.
 
 - |arpeggio-commands| are not supported yet.
 
