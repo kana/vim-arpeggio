@@ -325,6 +325,7 @@ endfunction
 
 
 function! s:unmap(mode, options, keys)  "{{{2
+  " FIXME: How about temporary key mappings "<SID>work:"?
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
   for key in a:keys
