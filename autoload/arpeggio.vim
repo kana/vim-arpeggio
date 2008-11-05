@@ -91,15 +91,15 @@ command! -nargs=* Arpeggiovmap  call s:cmd_map_or_list('v', 1, <q-args>)
 command! -nargs=* Arpeggioxmap  call s:cmd_map_or_list('x', 1, <q-args>)
 
 command! -bang -nargs=* Arpeggionoremap
-\        call s:cmd_map(<bang>0 ? 'ic' : 'nvo', 1, <q-args>)
-command! -nargs=* Arpeggiocnoremap  call s:cmd_map('c', 0, <q-args>)
-command! -nargs=* Arpeggioinoremap  call s:cmd_map('i', 0, <q-args>)
-command! -nargs=* Arpeggiolnoremap  call s:cmd_map('l', 0, <q-args>)
-command! -nargs=* Arpeggionnoremap  call s:cmd_map('n', 0, <q-args>)
-command! -nargs=* Arpeggioonoremap  call s:cmd_map('o', 0, <q-args>)
-command! -nargs=* Arpeggiosnoremap  call s:cmd_map('s', 0, <q-args>)
-command! -nargs=* Arpeggiovnoremap  call s:cmd_map('v', 0, <q-args>)
-command! -nargs=* Arpeggioxnoremap  call s:cmd_map('x', 0, <q-args>)
+\        call s:cmd_map_or_list(<bang>0 ? 'ic' : 'nvo', 1, <q-args>)
+command! -nargs=* Arpeggiocnoremap  call s:cmd_map_or_list('c', 0, <q-args>)
+command! -nargs=* Arpeggioinoremap  call s:cmd_map_or_list('i', 0, <q-args>)
+command! -nargs=* Arpeggiolnoremap  call s:cmd_map_or_list('l', 0, <q-args>)
+command! -nargs=* Arpeggionnoremap  call s:cmd_map_or_list('n', 0, <q-args>)
+command! -nargs=* Arpeggioonoremap  call s:cmd_map_or_list('o', 0, <q-args>)
+command! -nargs=* Arpeggiosnoremap  call s:cmd_map_or_list('s', 0, <q-args>)
+command! -nargs=* Arpeggiovnoremap  call s:cmd_map_or_list('v', 0, <q-args>)
+command! -nargs=* Arpeggioxnoremap  call s:cmd_map_or_list('x', 0, <q-args>)
 
 command! -bang -nargs=* Arpeggiounmap
 \        call s:cmd_unmap(<bang>0 ? 'ic' : 'nvo', <q-args>)
@@ -133,6 +133,13 @@ lnoremap <SID>  <Nop>
 
 
 " Functions  "{{{1
+function! arpeggio#list(modes, options, lhs)  "{{{2
+  throw 'NIY'
+endfunction
+
+
+
+
 function! arpeggio#load()  "{{{2
   " Does nothing - calling this function does source this script file.
 endfunction
@@ -188,27 +195,12 @@ endfunction
 
 
 
-function! s:cmd_list(modes, options, lhs)  "{{{2
-  throw 'NIY'
-endfunction
-
-
-
-
-function! s:cmd_map(modes, remap_p, q_args)  "{{{2
-  let [options, lhs, rhs] = s:parse_args(a:q_args)
-  return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
-endfunction
-
-
-
-
 function! s:cmd_map_or_list(modes, remap_p, q_args)  "{{{2
   let [options, lhs, rhs] = s:parse_args(a:q_args)
   if rhs is not 0
     return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
   else
-    return s:cmd_list(a:modes, options, lhs)
+    return arpeggio#list(a:modes, options, lhs)
   endif
 endfunction
 
