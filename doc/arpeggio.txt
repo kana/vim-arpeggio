@@ -69,8 +69,9 @@ COMMANDS					*arpeggio-commands*
 			Like |:map| and others, but map to {rhs} if and only
 			if all keys in {lhs} are simultaneously pressed.
 
-			Available |:map-arguments| are
-			<buffer>, <expr> and/or <silent>.
+			Available |:map-arguments| are <buffer>, <expr> and/or
+			<silent>.  See also |arpeggio#map()| for other notes
+			and limitations.
 
 :Arpeggionoremap {lhs} {rhs}			*:Arpeggionoremap*
 :Arpeggionoremap! {lhs} {rhs}			*:Arpeggionoremap!*
@@ -215,9 +216,7 @@ BUGS						*arpeggio-bugs*
 
   (*) http://en.wikipedia.org/wiki/Rollover_(key)
 
-- {lhs} cannot contain a special key such as <Left>, because such keys are
-  represented by 2 or more characters.  This limitation will be removed for
-  the futhre.
+- |arpeggio-commands| are not supported yet.
 
 - There are many bugs around the world.
 
