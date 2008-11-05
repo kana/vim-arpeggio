@@ -143,23 +143,32 @@ COMMANDS					*arpeggio-commands*
 ------------------------------------------------------------------------------
 FUNCTIONS					*arpeggio-functions*
 
+arpeggio#list({modes}, {options}, [{lhs}])	*arpeggio#list()*
+			Function version of |:Arpeggiomap_l| and others.
+			See |arpeggio#map()| for the details of arguments.
+
+			For this function, {lhs} can be omitted or can be 0.
+			If so, all arpeggio mappings defined in {modes} will
+			be listed.
+
 arpeggio#load()					*arpeggio#load()*
 			Load this plugin if it is not loaded yet.  Otherwise,
 			does nothing.  Call this function to ensure that
 			|arpeggio-commands| are defined before you use one of
 			them.
 
-arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
+						*arpeggio#map()*
+arpeggio#map({modes}, {options}, {remap-p}, {lhs}, {rhs})
 			Function version of |:Arpeggiomap| and others.
 
-			modes ~
+			{modes}
 				String.  Each character means one or more
 				modes to define the given key mapping.  "n"
 				means Normal mode, "v" means Visual mode and
 				Select mode (the same as what |:vmap| does),
 				and so forth.
 
-			options ~
+			{options}
 				String.  Each character means one of
 				|:map-arguments|.  The meanings of characters
 				are as follows:
@@ -172,21 +181,21 @@ arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
 				Other |:map-arguments| are not supported for
 				arpeggio key mappings.
 
-			remap_p ~
+			{remap-p}
 				Number as a boolean.  True means that rhs can
 				be remapped, false means remapping is not
 				allowed.
 
-			lhs ~
+			{lhs}
 				String.  This value must contain two or more
 				keys.  Special keys such as <C-u> must be
 				escaped with < and >, i.e., use '<C-u>' not
 				"\<C-u>".
 
-			rhs ~
+			{rhs}
 				String.
 
-arpeggio#unmap(modes, options, lhs)		*arpeggio#unmap()*
+arpeggio#unmap({modes}, {options}, {lhs})	*arpeggio#unmap()*
 			Function version of |:Arpeggiounmap| and others.
 			See |arpeggio#map()| for the details of arguments.
 
