@@ -238,7 +238,7 @@ function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
     \              a:mode, combo, combo)
   endfor
 
-  for combo in s:each_combination(a:keys)
+  for combo in s:permutations(a:keys, len(a:keys))
     execute printf('%smap <expr> <SID>work:%s  <SID>chord_success(%s)',
     \              a:mode, combo, string(combo))
     execute printf('%s%smap %s <SID>success:%s  %s',
@@ -261,6 +261,40 @@ endfunction
 
 
 
+function! s:permutations(ss, r)  "{{{2
+  " This function is translated one of itertools.permutations() of Python 2.6:
+  " http://www.python.org/doc/2.6/library/itertools.html#itertools.permutations
+  let result = []
+  let n = len(a:ss)
+  let r = a:r
+  let indices = range(n)
+  let cycles = range(n, n-r+1, -1)
+  let rest = n
+  for _ in range(n-1, n-r+1, -1)
+    let rest = rest * _
+  endfor
+
+  call add(result, join(map(indices[:r-1], 'a:ss[v:val]'), ''))
+  for _ in range(rest - 1)
+    for i in range(r-1, 0, -1)
+      let cycles[i] -= 1
+      if cycles[i] == 0
+        let indices[(i):] = indices[(i+1):] + indices[(i):(i)]
+        let cycles[i] = n - i
+      else
+        let j = cycles[i]
+        let [indices[i], indices[-j]] = [indices[-j], indices[i]]
+        call add(result, join(map(indices[:r-1], 'a:ss[v:val]'), ''))
+        break
+      endif
+    endfor
+  endfor
+  return result
+endfunction
+
+
+
+
 function! s:unmap(mode, options, keys)  "{{{2
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
@@ -269,7 +303,7 @@ function! s:unmap(mode, options, keys)  "{{{2
     \              a:mode, opt_buffer, key)
   endfor
 
-  for combo in s:each_combination(a:keys)
+  for combo in s:permutations(a:keys, len(a:keys))
     execute printf('%sunmap %s <SID>success:%s',
     \              a:mode,
     \              s:to_map_arguments(a:options),
@@ -290,21 +324,6 @@ let s:SID = "\<SNR>" . s:SID() . '_'
 
 function! s:each_char(s)  "{{{3
   return split(a:s, '.\zs')
-endfunction
-
-
-function! s:each_combination(keys)  "{{{3
-  if len(a:keys) == 1
-    return copy(a:keys)
-  else
-    let _ = []
-    for i in range(len(a:keys))
-      for combo in s:each_combination(s:without(a:keys, i))
-        call add(_, a:keys[i] . combo)
-      endfor
-    endfor
-    return _
-  endif
 endfunction
 
 
