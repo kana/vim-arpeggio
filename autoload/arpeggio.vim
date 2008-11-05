@@ -119,19 +119,6 @@ command! -nargs=* Arpeggioxunmap  call s:cmd_unmap('x', <q-args>)
 
 
 
-" Mappings  "{{{1
-
-noremap <SID>  <Nop>
-noremap! <SID>  <Nop>
-lnoremap <SID>  <Nop>
-
-
-
-
-
-
-
-
 " Functions  "{{{1
 function! arpeggio#list(modes, options, ...)  "{{{2
   let lhs = 1 <= a:0 ? a:1 : 0
