@@ -202,7 +202,8 @@ endfunction
 
 
 function! s:cmd_unmap(modes, q_args)  "{{{2
-  throw 'NIY'
+  let [options, lhs, rhs] = s:parse_args(a:q_args)
+  return arpeggio#unmap(a:modes, options, lhs)
 endfunction
 
 
