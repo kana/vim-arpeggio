@@ -66,7 +66,9 @@ if !exists('g:arpeggio_timeoutlen')
   let g:arpeggio_timeoutlen = 40
 endif
 
-let s:original_timeoutlen = 0  " See s:set_up_options() & s:restore_options().
+" See s:set_up_options() and s:restore_options().
+let s:original_showcmd = &showcmd
+let s:original_timeoutlen = &timeoutlen
 
 
 
@@ -278,13 +280,17 @@ endfunction
 
 
 function! s:restore_options()  "{{{3
+  let &showcmd = s:original_showcmd
   let &timeoutlen = s:original_timeoutlen
   return
 endfunction
 
 
 function! s:set_up_options()  "{{{3
+  let s:original_showcmd = &showcmd
   let s:original_timeoutlen = &timeoutlen
+
+  set noshowcmd  " To avoid flickering in the bottom line.
   let &timeoutlen = g:arpeggio_timeoutlen
   return
 endfunction
