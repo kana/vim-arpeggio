@@ -159,7 +159,7 @@ arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
 			rhs ~
 				String.
 
-arpeggio#unmap(modes, lhs)			*arpeggio#unmap()*
+arpeggio#unmap(modes, options, lhs)		*arpeggio#unmap()*
 			Function version of |:Arpeggiounmap| and others.
 			See |arpeggio#map()| for the details of arguments.
 

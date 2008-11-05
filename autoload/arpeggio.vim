@@ -150,8 +150,10 @@ endfunction
 
 
 
-function! arpeggio#unmap(modes, lhs)  "{{{2
-  throw 'NIY'
+function! arpeggio#unmap(modes, options, lhs)  "{{{2
+  for mode in s:each_char(a:modes)
+    call s:unmap(mode, a:options, s:split_to_keys(a:lhs))
+  endfor
 endfunction
 
 
@@ -252,6 +254,26 @@ endfunction
 
 function! s:parse_args(q_args)  "{{{2
   throw 'NIY'
+endfunction
+
+
+
+
+function! s:unmap(mode, options, keys)  "{{{2
+  let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
+
+  for key in a:keys
+    execute printf('%sunmap %s %s',
+    \              a:mode, opt_buffer, key)
+  endfor
+
+  for combo in s:each_combination(a:keys)
+    execute printf('%sunmap %s <SID>success:%s',
+    \              a:mode,
+    \              s:to_map_arguments(a:options),
+    \              combo)
+  endfor
+  return
 endfunction
 
 
