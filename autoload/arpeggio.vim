@@ -231,7 +231,11 @@ function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
     \              a:mode, opt_buffer, key, string(key))
   endfor
 
-  for combo in a:keys  " FIXME: for 3 or more keys
+  let combos = []
+  for i in range(1, len(a:keys) - 1)
+    call extend(combos, s:permutations(a:keys, i))
+  endfor
+  for combo in combos
     execute printf('%smap <expr> <SID>work:%s  <SID>chord_cancel(%s)',
     \              a:mode, combo, string(combo))
     execute printf('silent! %snoremap <unique> <Plug>(arpeggio-default:%s) %s',

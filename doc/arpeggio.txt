@@ -152,7 +152,8 @@ arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
 				allowed.
 
 			lhs ~
-				String.  Special keys such as <C-u> must be
+				String.  This value must contain two or more
+				keys.  Special keys such as <C-u> must be
 				escaped with < and >, i.e., use '<C-u>' not
 				"\<C-u>".
 
@@ -204,8 +205,15 @@ g:arpeggio_timeoutlen	number  (default 40)	*g:arpeggio_timeoutlen*
 ==============================================================================
 BUGS						*arpeggio-bugs*
 
-- {lhs} must consist of two characters.  This limitation will be removed for
-  the future.
+- Not all keyboards have N-key rollover (*).  Though this plugin supports
+  unlimited number of simultaneously pressed keys, 3 or more keys may not be
+  inputted simultaneously.
+
+  For keyboards which don't have N-key rollover, it's possible to emulate to
+  simultaneously press 3 or more keys by pressing each key after another key
+  in short time, i.e., arpeggio.
+
+  (*) http://en.wikipedia.org/wiki/Rollover_(key)
 
 - {lhs} cannot contain a special key such as <Left>, because such keys are
   represented by 2 or more characters.  This limitation will be removed for
