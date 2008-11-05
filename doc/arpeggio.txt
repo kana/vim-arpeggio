@@ -152,7 +152,9 @@ arpeggio#map(modes, options, remap_p, lhs, rhs)	*arpeggio#map()*
 				allowed.
 
 			lhs ~
-				String.
+				String.  Special keys such as <C-u> must be
+				escaped with < and >, i.e., use '<C-u>' not
+				"\<C-u>".
 
 			rhs ~
 				String.

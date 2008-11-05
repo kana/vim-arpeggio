@@ -142,7 +142,7 @@ endfunction
 
 function! arpeggio#map(modes, options, remap_p, lhs, rhs)  "{{{2
   for mode in s:each_char(a:modes)
-    call s:map(mode, a:options, a:remap_p, s:split_to_chars(a:lhs), a:rhs)
+    call s:map(mode, a:options, a:remap_p, s:split_to_keys(a:lhs), a:rhs)
   endfor
   return
 endfunction
@@ -301,8 +301,9 @@ function! s:set_up_options()  "{{{3
 endfunction
 
 
-function! s:split_to_chars(lhs)  "{{{3
-  " FIXME: Not perfect.
+function! s:split_to_keys(lhs)  "{{{3
+  " Assumption: Special keys such as <C-u> are escaped with < and >, i.e.,
+  "             a:lhs doesn't directly contain any escape sequences.
   return split(a:lhs, '\(<[^<>]\+>\|.\)\zs')
 endfunction
 
