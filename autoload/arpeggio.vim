@@ -171,7 +171,7 @@ endfunction
 function! s:chord_key(key)  "{{{2
   let s:original_timeoutlen = &timeoutlen
   let &timeoutlen = g:arpeggio_timeoutlen
-  return s:SID_PREFIX . 'work:' . a:key  " <SID>work:...
+  return s:SID . 'work:' . a:key  " <SID>work:...
 endfunction
 
 
@@ -179,7 +179,7 @@ endfunction
 
 function! s:chord_success(keys)  "{{{2
   let &timeoutlen = s:original_timeoutlen
-  return s:SID_PREFIX . 'success:' . a:keys  " <SID>success:...
+  return s:SID . 'success:' . a:keys  " <SID>success:...
 endfunction
 
 
@@ -252,10 +252,10 @@ endfunction
 
 
 " Misc.  "{{{2
-function! s:SID_PREFIX()  "{{{3
- return matchstr(expand('<sfile>'), '<SNR>\d\+_')
+function! s:SID()  "{{{3
+  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_')
 endfunction
-let s:SID_PREFIX = s:SID_PREFIX()
+let s:SID = "\<SNR>" . s:SID() . '_'
 
 
 function! s:each_char(s)  "{{{3
