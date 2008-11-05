@@ -191,7 +191,7 @@ endfunction
 
 function! s:cmd_map_or_list(modes, remap_p, q_args)  "{{{2
   let [options, lhs, rhs] = s:parse_args(a:q_args)
-  if rhs is not 0
+  if rhs isnot 0
     return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
   else
     return arpeggio#list(a:modes, options, lhs)
