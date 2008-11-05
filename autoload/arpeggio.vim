@@ -228,7 +228,7 @@ function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
 
   for key in a:keys
     execute printf('%smap <expr> %s %s  <SID>chord_key(%s)',
-    \              a:mode, opt_buffer, key, string(key))
+    \              a:mode, opt_buffer, key, string(s:unescape_lhs(key)))
   endfor
 
   let combos = []
@@ -237,14 +237,14 @@ function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
   endfor
   for combo in combos
     execute printf('%smap <expr> <SID>work:%s  <SID>chord_cancel(%s)',
-    \              a:mode, combo, string(combo))
+    \              a:mode, combo, string(s:unescape_lhs(combo)))
     execute printf('silent! %snoremap <unique> <Plug>(arpeggio-default:%s) %s',
     \              a:mode, combo, combo)
   endfor
 
   for combo in s:permutations(a:keys, len(a:keys))
     execute printf('%smap <expr> <SID>work:%s  <SID>chord_success(%s)',
-    \              a:mode, combo, string(combo))
+    \              a:mode, combo, string(s:unescape_lhs(combo)))
     execute printf('%s%smap %s <SID>success:%s  %s',
     \              a:mode,
     \              a:remap_p ? '' : 'nore',
@@ -328,6 +328,13 @@ let s:SID = "\<SNR>" . s:SID() . '_'
 
 function! s:each_char(s)  "{{{3
   return split(a:s, '.\zs')
+endfunction
+
+
+function! s:unescape_lhs(escaped_lhs)  "{{{3
+  let keys = s:split_to_keys(a:escaped_lhs)
+  call map(keys, 'v:val =~ "^<.*>$" ? eval(''"\'' . v:val . ''"'') : v:val')
+  return join(keys, '')
 endfunction
 
 
