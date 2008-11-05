@@ -222,9 +222,11 @@ endfunction
 
 function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
   " Assumption: Values in a:keys are <>-escaped, e.g., "<Tab>" not "\<Tab>".
+  let opt_buffer = 0 <= index(a:options, '<buffer>') ? '<buffer>' : ''
+
   for key in a:keys
-    execute printf('%smap <expr> %s  <SID>chord_key(%s)',
-    \              a:mode, key, string(key))
+    execute printf('%smap <expr> %s %s  <SID>chord_key(%s)',
+    \              a:mode, opt_buffer, key, string(key))
       " be :silent! <unique> for 3 or more keys.
     execute printf('%smap <expr> <SID>work:%s  <SID>chord_cancel(%s)',
     \              a:mode, key, string(key))
