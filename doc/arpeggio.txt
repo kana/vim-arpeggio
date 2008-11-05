@@ -62,9 +62,6 @@ are the following differences:
 
 (*) http://www.emacswiki.org/cgi-bin/wiki/key-chord.el
 
-Note that this is a beta version.  |arpeggio-commands| are not implemented
-yet.
-
 
 Requirements:
 - Vim 7.2 or later
@@ -254,8 +251,6 @@ BUGS						*arpeggio-bugs*
   and/or |key-mapping|.  Because recorded key sequence doesn't have any
   information about typing delay for each key.  So some keys may be treated as
   an arpeggio key mapping unexpectedly.
-
-- |arpeggio-commands| are not supported yet.
 
 - There are many bugs around the world.
 

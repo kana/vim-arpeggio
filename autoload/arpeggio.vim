@@ -246,7 +246,38 @@ endfunction
 
 
 function! s:parse_args(q_args)  "{{{2
-  throw 'NIY'
+  " Parse <q-args> for :map commands into {options}, {lhs} and {rhs}.
+  " Omitted arguments are expressed as 0.
+  let ss = s:split_to_keys(a:q_args)
+
+  let options = ''
+  let ss = s:skip_spaces(ss)
+  while 0 < len(ss)
+    if ss[0] =~? '<buffer>'
+      let options .= 'b'
+    elseif ss[0] =~? '<expr>'
+      let options .= 'e'
+    elseif ss[0] =~? '<silent>'
+      let options .= 's'
+    else
+      break
+    endif
+    let ss = s:skip_spaces(ss[1:])
+  endwhile
+
+  let i = 0
+  while i < len(ss)
+    if ss[i] =~ '\s'
+      break
+    endif
+    let i += 1
+  endwhile
+  let lhs = 1 <= i ? join(ss[:i-1], '') : 0
+  let ss = s:skip_spaces(ss[(i):])
+
+  let rhs = 0 < len(ss) ? join(ss, '') : 0
+
+  return [options, lhs, rhs]
 endfunction
 
 
@@ -339,6 +370,17 @@ function! s:set_up_options()  "{{{3
   set noshowcmd  " To avoid flickering in the bottom line.
   let &timeoutlen = g:arpeggio_timeoutlen
   return
+endfunction
+
+
+function! s:skip_spaces(ss)  "{{{3
+  let i = 0
+  for i in range(len(a:ss))
+    if a:ss[i] !~# '\s'
+      break
+    endif
+  endfor
+  return a:ss[(i):]
 endfunction
 
 
