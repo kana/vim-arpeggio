@@ -252,6 +252,8 @@ BUGS						*arpeggio-bugs*
   information about typing delay for each key.  So some keys may be treated as
   an arpeggio key mapping unexpectedly.
 
+- Feature idea: 'timeoutlen' per key.
+
 - There are many bugs around the world.
 
 
@@ -259,6 +261,11 @@ BUGS						*arpeggio-bugs*
 
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
+
+0.0.1	2008-11-06T09:34:19+09:00
+	- Implement |arpeggio-commands|.
+	- Add missing |arpeggio#list()|.
+	- Revise minor stuffs.
 
 0.0.0	2008-11-04T15:53:03+09:00
 	- Initial version.
