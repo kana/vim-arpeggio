@@ -125,7 +125,6 @@ endfunction
 
 
 
-" Misc.  "{{ {1
 " Core  "{{{1
 function! arpeggio#_map_or_list(modes, remap_p, q_args)  "{{{2
   let [options, lhs, rhs] = s:parse_args(a:q_args)
