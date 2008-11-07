@@ -97,7 +97,7 @@ endfunction
 
 function! arpeggio#map(modes, options, remap_p, lhs, rhs)  "{{{2
   for mode in s:each_char(a:modes)
-    call s:map(mode, a:options, a:remap_p, s:split_to_keys(a:lhs), a:rhs)
+    call s:do_map(mode, a:options, a:remap_p, s:split_to_keys(a:lhs), a:rhs)
   endfor
   return
 endfunction
@@ -109,7 +109,7 @@ function! arpeggio#unmap(modes, options, lhs)  "{{{2
   let v:errmsg = ''
 
   for mode in s:each_char(a:modes)
-    call s:unmap(mode, a:options, s:split_to_keys(a:lhs))
+    call s:do_unmap(mode, a:options, s:split_to_keys(a:lhs))
   endfor
 
   if v:errmsg != ''
@@ -171,7 +171,7 @@ endfunction
 
 
 
-function! s:map(mode, options, remap_p, keys, rhs)  "{{{2
+function! s:do_map(mode, options, remap_p, keys, rhs)  "{{{2
   " Assumption: Values in a:keys are <>-escaped, e.g., "<Tab>" not "\<Tab>".
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
@@ -207,7 +207,7 @@ endfunction
 
 
 
-function! s:unmap(mode, options, keys)  "{{{2
+function! s:do_unmap(mode, options, keys)  "{{{2
   " FIXME: How about temporary key mappings "<SID>work:"?
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
