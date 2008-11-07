@@ -152,7 +152,7 @@ arpeggio#load()					*arpeggio#load()*
 			Load this plugin if it is not loaded yet.  Otherwise,
 			does nothing.  Call this function to ensure that
 			|arpeggio-commands| are defined before you use one of
-			them.
+			them, especially, in your |vimrc|.
 
 						*arpeggio#map()*
 arpeggio#map({modes}, {options}, {remap-p}, {lhs}, {rhs})
@@ -265,6 +265,9 @@ CHANGELOG					*arpeggio-changelog*
 0.0.2	2008-11-07T22:16:51+09:00
 	- Fix |:Arpeggionoremap| that allowed remapping but it should not do
 	  so.  (Thanks for id:ampmmn)
+	- Define |arpeggio-commands| and |arpeggio-variables| automatically
+	  for interactive or other use.  (But you still have to call
+	  |arpeggio#load()| to use them in vimrc.)
 
 0.0.1	2008-11-06T09:34:19+09:00
 	- Implement |arpeggio-commands|.

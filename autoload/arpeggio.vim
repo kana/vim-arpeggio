@@ -62,10 +62,6 @@
 
 " Variables  "{{{1
 
-if !exists('g:arpeggio_timeoutlen')
-  let g:arpeggio_timeoutlen = 40
-endif
-
 " See s:set_up_options() and s:restore_options().
 let s:original_showcmd = &showcmd
 let s:original_timeoutlen = &timeoutlen
@@ -77,49 +73,27 @@ let s:original_timeoutlen = &timeoutlen
 
 
 
-" Commands  "{{{1
-
-command! -bang -nargs=* Arpeggiomap
-\        call s:cmd_map_or_list(<bang>0 ? 'ic' : 'nvo', 1, <q-args>)
-command! -nargs=* Arpeggiocmap  call s:cmd_map_or_list('c', 1, <q-args>)
-command! -nargs=* Arpeggioimap  call s:cmd_map_or_list('i', 1, <q-args>)
-command! -nargs=* Arpeggiolmap  call s:cmd_map_or_list('l', 1, <q-args>)
-command! -nargs=* Arpeggionmap  call s:cmd_map_or_list('n', 1, <q-args>)
-command! -nargs=* Arpeggioomap  call s:cmd_map_or_list('o', 1, <q-args>)
-command! -nargs=* Arpeggiosmap  call s:cmd_map_or_list('s', 1, <q-args>)
-command! -nargs=* Arpeggiovmap  call s:cmd_map_or_list('v', 1, <q-args>)
-command! -nargs=* Arpeggioxmap  call s:cmd_map_or_list('x', 1, <q-args>)
-
-command! -bang -nargs=* Arpeggionoremap
-\        call s:cmd_map_or_list(<bang>0 ? 'ic' : 'nvo', 0, <q-args>)
-command! -nargs=* Arpeggiocnoremap  call s:cmd_map_or_list('c', 0, <q-args>)
-command! -nargs=* Arpeggioinoremap  call s:cmd_map_or_list('i', 0, <q-args>)
-command! -nargs=* Arpeggiolnoremap  call s:cmd_map_or_list('l', 0, <q-args>)
-command! -nargs=* Arpeggionnoremap  call s:cmd_map_or_list('n', 0, <q-args>)
-command! -nargs=* Arpeggioonoremap  call s:cmd_map_or_list('o', 0, <q-args>)
-command! -nargs=* Arpeggiosnoremap  call s:cmd_map_or_list('s', 0, <q-args>)
-command! -nargs=* Arpeggiovnoremap  call s:cmd_map_or_list('v', 0, <q-args>)
-command! -nargs=* Arpeggioxnoremap  call s:cmd_map_or_list('x', 0, <q-args>)
-
-command! -bang -nargs=* Arpeggiounmap
-\        call s:cmd_unmap(<bang>0 ? 'ic' : 'nvo', <q-args>)
-command! -nargs=* Arpeggiocunmap  call s:cmd_unmap('c', <q-args>)
-command! -nargs=* Arpeggioiunmap  call s:cmd_unmap('i', <q-args>)
-command! -nargs=* Arpeggiolunmap  call s:cmd_unmap('l', <q-args>)
-command! -nargs=* Arpeggionunmap  call s:cmd_unmap('n', <q-args>)
-command! -nargs=* Arpeggioounmap  call s:cmd_unmap('o', <q-args>)
-command! -nargs=* Arpeggiosunmap  call s:cmd_unmap('s', <q-args>)
-command! -nargs=* Arpeggiovunmap  call s:cmd_unmap('v', <q-args>)
-command! -nargs=* Arpeggioxunmap  call s:cmd_unmap('x', <q-args>)
-
-
-
-
-
-
-
-
 " Functions  "{{{1
+function! arpeggio#_map_or_list(modes, remap_p, q_args)  "{{{2
+  let [options, lhs, rhs] = s:parse_args(a:q_args)
+  if rhs isnot 0
+    return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
+  else
+    return arpeggio#list(a:modes, options, lhs)
+  endif
+endfunction
+
+
+
+
+function! arpeggio#_unmap(modes, q_args)  "{{{2
+  let [options, lhs, rhs] = s:parse_args(a:q_args)
+  return arpeggio#unmap(a:modes, options, lhs)
+endfunction
+
+
+
+
 function! arpeggio#list(modes, options, ...)  "{{{2
   let lhs = 1 <= a:0 ? a:1 : 0
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
@@ -135,7 +109,7 @@ endfunction
 
 
 function! arpeggio#load()  "{{{2
-  " Does nothing - calling this function does source this script file.
+  runtime! plugin/arpeggio.vim
 endfunction
 
 
@@ -191,26 +165,6 @@ endfunction
 function! s:chord_success(keys)  "{{{2
   call s:restore_options()
   return s:SID . 'success:' . a:keys  " <SID>success:...
-endfunction
-
-
-
-
-function! s:cmd_map_or_list(modes, remap_p, q_args)  "{{{2
-  let [options, lhs, rhs] = s:parse_args(a:q_args)
-  if rhs isnot 0
-    return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
-  else
-    return arpeggio#list(a:modes, options, lhs)
-  endif
-endfunction
-
-
-
-
-function! s:cmd_unmap(modes, q_args)  "{{{2
-  let [options, lhs, rhs] = s:parse_args(a:q_args)
-  return arpeggio#unmap(a:modes, options, lhs)
 endfunction
 
 
