@@ -73,27 +73,7 @@ let s:original_timeoutlen = &timeoutlen
 
 
 
-" Functions  "{{{1
-function! arpeggio#_map_or_list(modes, remap_p, q_args)  "{{{2
-  let [options, lhs, rhs] = s:parse_args(a:q_args)
-  if rhs isnot 0
-    return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
-  else
-    return arpeggio#list(a:modes, options, lhs)
-  endif
-endfunction
-
-
-
-
-function! arpeggio#_unmap(modes, q_args)  "{{{2
-  let [options, lhs, rhs] = s:parse_args(a:q_args)
-  return arpeggio#unmap(a:modes, options, lhs)
-endfunction
-
-
-
-
+" Public  "{{{1
 function! arpeggio#list(modes, options, ...)  "{{{2
   let lhs = 1 <= a:0 ? a:1 : 0
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
@@ -146,6 +126,27 @@ endfunction
 
 
 " Misc.  "{{ {1
+" Core  "{{{1
+function! arpeggio#_map_or_list(modes, remap_p, q_args)  "{{{2
+  let [options, lhs, rhs] = s:parse_args(a:q_args)
+  if rhs isnot 0
+    return arpeggio#map(a:modes, options, a:remap_p, lhs, rhs)
+  else
+    return arpeggio#list(a:modes, options, lhs)
+  endif
+endfunction
+
+
+
+
+function! arpeggio#_unmap(modes, q_args)  "{{{2
+  let [options, lhs, rhs] = s:parse_args(a:q_args)
+  return arpeggio#unmap(a:modes, options, lhs)
+endfunction
+
+
+
+
 function! s:chord_cancel(key)  "{{{2
   call s:restore_options()
   return "\<Plug>(arpeggio-default:" . a:key . ')'
@@ -206,6 +207,48 @@ endfunction
 
 
 
+function! s:unmap(mode, options, keys)  "{{{2
+  " FIXME: How about temporary key mappings "<SID>work:"?
+  let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
+
+  for key in a:keys
+    silent! execute printf('%sunmap %s %s',
+    \                      a:mode, opt_buffer, key)
+  endfor
+
+  for combo in s:permutations(a:keys, len(a:keys))
+    silent! execute printf('%sunmap %s <SID>success:%s',
+    \                      a:mode,
+    \                      s:to_map_arguments(a:options),
+    \                      combo)
+  endfor
+
+  return
+endfunction
+
+
+
+
+
+
+
+
+" Misc.  "{{{1
+function! s:SID()  "{{{2
+  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_')
+endfunction
+let s:SID = "\<SNR>" . s:SID() . '_'
+
+
+
+
+function! s:each_char(s)  "{{{2
+  return split(a:s, '.\zs')
+endfunction
+
+
+
+
 function! s:parse_args(q_args)  "{{{2
   " Parse <q-args> for :map commands into {options}, {lhs} and {rhs}.
   " Omitted arguments are expressed as 0.
@@ -244,41 +287,7 @@ endfunction
 
 
 
-function! s:unmap(mode, options, keys)  "{{{2
-  " FIXME: How about temporary key mappings "<SID>work:"?
-  let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
-
-  for key in a:keys
-    silent! execute printf('%sunmap %s %s',
-    \                      a:mode, opt_buffer, key)
-  endfor
-
-  for combo in s:permutations(a:keys, len(a:keys))
-    silent! execute printf('%sunmap %s <SID>success:%s',
-    \                      a:mode,
-    \                      s:to_map_arguments(a:options),
-    \                      combo)
-  endfor
-
-  return
-endfunction
-
-
-
-
-" Misc.  "{{{2
-function! s:SID()  "{{{3
-  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_')
-endfunction
-let s:SID = "\<SNR>" . s:SID() . '_'
-
-
-function! s:each_char(s)  "{{{3
-  return split(a:s, '.\zs')
-endfunction
-
-
-function! s:permutations(ss, r)  "{{{3
+function! s:permutations(ss, r)  "{{{2
   " This function is translated one of itertools.permutations() of Python 2.6:
   " http://www.python.org/doc/2.6/library/itertools.html#itertools.permutations
   let result = []
@@ -310,14 +319,18 @@ function! s:permutations(ss, r)  "{{{3
 endfunction
 
 
-function! s:restore_options()  "{{{3
+
+
+function! s:restore_options()  "{{{2
   let &showcmd = s:original_showcmd
   let &timeoutlen = s:original_timeoutlen
   return
 endfunction
 
 
-function! s:set_up_options()  "{{{3
+
+
+function! s:set_up_options()  "{{{2
   let s:original_showcmd = &showcmd
   let s:original_timeoutlen = &timeoutlen
 
@@ -327,7 +340,9 @@ function! s:set_up_options()  "{{{3
 endfunction
 
 
-function! s:skip_spaces(ss)  "{{{3
+
+
+function! s:skip_spaces(ss)  "{{{2
   let i = 0
   for i in range(len(a:ss))
     if a:ss[i] !~# '\s'
@@ -338,27 +353,35 @@ function! s:skip_spaces(ss)  "{{{3
 endfunction
 
 
-function! s:split_to_keys(lhs)  "{{{3
+
+
+function! s:split_to_keys(lhs)  "{{{2
   " Assumption: Special keys such as <C-u> are escaped with < and >, i.e.,
   "             a:lhs doesn't directly contain any escape sequences.
   return split(a:lhs, '\(<[^<>]\+>\|.\)\zs')
 endfunction
 
 
-function! s:to_map_arguments(options)  "{{{3
+
+
+function! s:to_map_arguments(options)  "{{{2
   let _ = {'b': '<buffer>', 'e': '<expr>', 's': '<silent>'}
   return join(map(s:each_char(a:options), '_[v:val]'))
 endfunction
 
 
-function! s:unescape_lhs(escaped_lhs)  "{{{3
+
+
+function! s:unescape_lhs(escaped_lhs)  "{{{2
   let keys = s:split_to_keys(a:escaped_lhs)
   call map(keys, 'v:val =~ "^<.*>$" ? eval(''"\'' . v:val . ''"'') : v:val')
   return join(keys, '')
 endfunction
 
 
-function! s:without(list, i)  "{{{3
+
+
+function! s:without(list, i)  "{{{2
   if 0 < a:i
     return a:list[0 : (a:i-1)] + a:list[(a:i+1) : -1]
   else
