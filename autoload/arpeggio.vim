@@ -91,7 +91,7 @@ command! -nargs=* Arpeggiovmap  call s:cmd_map_or_list('v', 1, <q-args>)
 command! -nargs=* Arpeggioxmap  call s:cmd_map_or_list('x', 1, <q-args>)
 
 command! -bang -nargs=* Arpeggionoremap
-\        call s:cmd_map_or_list(<bang>0 ? 'ic' : 'nvo', 1, <q-args>)
+\        call s:cmd_map_or_list(<bang>0 ? 'ic' : 'nvo', 0, <q-args>)
 command! -nargs=* Arpeggiocnoremap  call s:cmd_map_or_list('c', 0, <q-args>)
 command! -nargs=* Arpeggioinoremap  call s:cmd_map_or_list('i', 0, <q-args>)
 command! -nargs=* Arpeggiolnoremap  call s:cmd_map_or_list('l', 0, <q-args>)
