@@ -290,40 +290,6 @@ endfunction
 
 
 
-function! s:permutations(ss, r)  "{{{2
-  " This function is translated one of itertools.permutations() of Python 2.6:
-  " http://www.python.org/doc/2.6/library/itertools.html#itertools.permutations
-  let result = []
-  let n = len(a:ss)
-  let r = a:r
-  let indices = range(n)
-  let cycles = range(n, n-r+1, -1)
-  let rest = n
-  for _ in range(n-1, n-r+1, -1)
-    let rest = rest * _
-  endfor
-
-  call add(result, join(map(indices[:r-1], 'a:ss[v:val]'), ''))
-  for _ in range(rest - 1)
-    for i in range(r-1, 0, -1)
-      let cycles[i] -= 1
-      if cycles[i] == 0
-        let indices[(i):] = indices[(i+1):] + indices[(i):(i)]
-        let cycles[i] = n - i
-      else
-        let j = cycles[i]
-        let [indices[i], indices[-j]] = [indices[-j], indices[i]]
-        call add(result, join(map(indices[:r-1], 'a:ss[v:val]'), ''))
-        break
-      endif
-    endfor
-  endfor
-  return result
-endfunction
-
-
-
-
 function! s:unmap(mode, options, keys)  "{{{2
   " FIXME: How about temporary key mappings "<SID>work:"?
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
@@ -358,10 +324,35 @@ function! s:each_char(s)  "{{{3
 endfunction
 
 
-function! s:unescape_lhs(escaped_lhs)  "{{{3
-  let keys = s:split_to_keys(a:escaped_lhs)
-  call map(keys, 'v:val =~ "^<.*>$" ? eval(''"\'' . v:val . ''"'') : v:val')
-  return join(keys, '')
+function! s:permutations(ss, r)  "{{{3
+  " This function is translated one of itertools.permutations() of Python 2.6:
+  " http://www.python.org/doc/2.6/library/itertools.html#itertools.permutations
+  let result = []
+  let n = len(a:ss)
+  let r = a:r
+  let indices = range(n)
+  let cycles = range(n, n-r+1, -1)
+  let rest = n
+  for _ in range(n-1, n-r+1, -1)
+    let rest = rest * _
+  endfor
+
+  call add(result, join(map(indices[:r-1], 'a:ss[v:val]'), ''))
+  for _ in range(rest - 1)
+    for i in range(r-1, 0, -1)
+      let cycles[i] -= 1
+      if cycles[i] == 0
+        let indices[(i):] = indices[(i+1):] + indices[(i):(i)]
+        let cycles[i] = n - i
+      else
+        let j = cycles[i]
+        let [indices[i], indices[-j]] = [indices[-j], indices[i]]
+        call add(result, join(map(indices[:r-1], 'a:ss[v:val]'), ''))
+        break
+      endif
+    endfor
+  endfor
+  return result
 endfunction
 
 
@@ -403,6 +394,13 @@ endfunction
 function! s:to_map_arguments(options)  "{{{3
   let _ = {'b': '<buffer>', 'e': '<expr>', 's': '<silent>'}
   return join(map(s:each_char(a:options), '_[v:val]'))
+endfunction
+
+
+function! s:unescape_lhs(escaped_lhs)  "{{{3
+  let keys = s:split_to_keys(a:escaped_lhs)
+  call map(keys, 'v:val =~ "^<.*>$" ? eval(''"\'' . v:val . ''"'') : v:val')
+  return join(keys, '')
 endfunction
 
 
