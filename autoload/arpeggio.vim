@@ -183,6 +183,22 @@ function! s:do_map(mode, options, remap_p, keys, rhs)  "{{{2
   " Assumption: Values in a:keys are <>-escaped, e.g., "<Tab>" not "\<Tab>".
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
+  let already_mapped_p = 0
+  for key in a:keys
+    let rhs = maparg(key, a:mode)
+    if rhs != '' && rhs !=# ('<SNR>' . matchstr(s:SID, '\d\+') . '_'
+    \                        . 'chord_key(' . string(key) . ')')
+      echohl WarningMsg
+      echomsg 'Key' string(key) 'is already mapped in mode' string(a:mode)
+      echohl None
+      let already_mapped_p = !0
+    endif
+  endfor
+  if a:options =~# 'u' && already_mapped_p
+    echoer 'Abort to map because of the above reason'
+    return
+  endif
+
   for key in a:keys
     execute printf('%smap <expr> %s %s  <SID>chord_key(%s)',
     \              a:mode, opt_buffer, key, string(s:unescape_lhs(key)))
@@ -271,6 +287,8 @@ function! s:parse_args(q_args)  "{{{2
       let options .= 'e'
     elseif ss[0] =~? '<silent>'
       let options .= 's'
+    elseif ss[0] =~? '<unique>'
+      let options .= 'u'
     else
       break
     endif
@@ -373,7 +391,7 @@ endfunction
 
 
 function! s:to_map_arguments(options)  "{{{2
-  let _ = {'b': '<buffer>', 'e': '<expr>', 's': '<silent>'}
+  let _ = {'b': '<buffer>', 'e': '<expr>', 's': '<silent>', 'u': '<unique>'}
   return join(map(s:each_char(a:options), '_[v:val]'))
 endfunction
 

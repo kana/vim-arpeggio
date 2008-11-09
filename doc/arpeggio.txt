@@ -93,9 +93,9 @@ COMMANDS					*arpeggio-commands*
 			Like |:map| and others, but map to {rhs} if and only
 			if all keys in {lhs} are simultaneously pressed.
 
-			Available |:map-arguments| are <buffer>, <expr> and/or
-			<silent>.  See also |arpeggio#map()| for other notes
-			and limitations.
+			Available |:map-arguments| are <buffer>, <expr>,
+			<silent> and/or <unique>.  See also |arpeggio#map()|
+			for other notes and limitations.
 
 :Arpeggionoremap {lhs} {rhs}			*:Arpeggionoremap*
 :Arpeggionoremap! {lhs} {rhs}			*:Arpeggionoremap!*
@@ -176,9 +176,24 @@ arpeggio#map({modes}, {options}, {remap-p}, {lhs}, {rhs})
 				b	<buffer>
 				e	<expr>
 				s	<silent>
+				u	<unique>
 
 				Other |:map-arguments| are not supported for
 				arpeggio key mappings.
+
+				Note that the meaning of <unique> is a bit
+				differed as follows:
+
+				- If a key in {lhs} is already mapped to
+				  something other than a part of
+				  |arpeggio-key-mapping|, an error will be
+				  raised and defining of this mapping will be
+				  aborted.
+
+				- If {lhs} is already mapped to another
+				  |arpeggio-key-mapping|, an error will be
+				  raised and defining of this mapping will be
+				  aborted.
 
 			{remap-p}
 				Number as a boolean.  True means that rhs can
@@ -266,6 +281,10 @@ CHANGELOG					*arpeggio-changelog*
 
 0.0.3	2008-11-09T10:37:46+09:00
 	- Add |:Arpeggio|.
+	- Support |:map-<unique>| for |arpeggio#map()| and other commands.
+	- In |arpeggio#map()| and other commands, warn if a key in {lhs} is
+	  already mapped to something other than a part of another
+	  |arpeggio-key-mapping|.
 
 0.0.2	2008-11-07T22:16:51+09:00
 	- Fix |:Arpeggionoremap| that allowed remapping but it should not do
