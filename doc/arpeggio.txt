@@ -54,11 +54,9 @@ mode by pressing "j" and "k" simultaneously, while solely pressed "j" are "k"
 are worked the same as the default ones.
 
 The concept of this plugin is derived from Emacs' key-chord.el (*), but there
-are the following differences:
+is the following difference:
 
-- Number of keys is unlimited.
-- "One-key chord" is not supported.  Because Vim natively supports it - see
-  |map-ambiguous| for the detail.
+- Number of keys to be simultaneously pressed is unlimited.
 
 (*) http://www.emacswiki.org/cgi-bin/wiki/key-chord.el
 
