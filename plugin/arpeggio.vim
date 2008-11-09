@@ -41,46 +41,51 @@ endif
 
 command! -bar -nargs=+ Arpeggio  call arpeggio#_do(<q-args>)
 
-command! -bang -bar -nargs=* Arpeggiomap
-\        call arpeggio#_map_or_list(<bang>0 ? 'ic' : 'nvo', 1, <q-args>)
-command! -bar -nargs=* Arpeggiocmap  call arpeggio#_map_or_list('c',1,<q-args>)
-command! -bar -nargs=* Arpeggioimap  call arpeggio#_map_or_list('i',1,<q-args>)
-command! -bar -nargs=* Arpeggiolmap  call arpeggio#_map_or_list('l',1,<q-args>)
-command! -bar -nargs=* Arpeggionmap  call arpeggio#_map_or_list('n',1,<q-args>)
-command! -bar -nargs=* Arpeggioomap  call arpeggio#_map_or_list('o',1,<q-args>)
-command! -bar -nargs=* Arpeggiosmap  call arpeggio#_map_or_list('s',1,<q-args>)
-command! -bar -nargs=* Arpeggiovmap  call arpeggio#_map_or_list('v',1,<q-args>)
-command! -bar -nargs=* Arpeggioxmap  call arpeggio#_map_or_list('x',1,<q-args>)
 
-command! -bang -bar -nargs=* Arpeggionoremap
-\        call arpeggio#_map_or_list(<bang>0 ? 'ic' : 'nvo', 0, <q-args>)
-command! -bar -nargs=* Arpeggiocnoremap
-\        call arpeggio#_map_or_list('c', 0, <q-args>)
-command! -bar -nargs=* Arpeggioinoremap
-\        call arpeggio#_map_or_list('i', 0, <q-args>)
-command! -bar -nargs=* Arpeggiolnoremap
-\        call arpeggio#_map_or_list('l', 0, <q-args>)
-command! -bar -nargs=* Arpeggionnoremap
-\        call arpeggio#_map_or_list('n', 0, <q-args>)
-command! -bar -nargs=* Arpeggioonoremap
-\        call arpeggio#_map_or_list('o', 0, <q-args>)
-command! -bar -nargs=* Arpeggiosnoremap
-\        call arpeggio#_map_or_list('s', 0, <q-args>)
-command! -bar -nargs=* Arpeggiovnoremap
-\        call arpeggio#_map_or_list('v', 0, <q-args>)
-command! -bar -nargs=* Arpeggioxnoremap
-\        call arpeggio#_map_or_list('x', 0, <q-args>)
+function! s:_(...)
+  execute call('printf',
+  \            ['command! %s -bar -nargs=* Arpeggio%s'
+  \             . '  call arpeggio#_map_or_list(%s, %s, <q-args>)']
+  \            + a:000)
+endfunction
 
-command! -bang -bar -nargs=* Arpeggiounmap
-\        call arpeggio#_unmap(<bang>0 ? 'ic' : 'nvo', <q-args>)
-command! -bar -nargs=* Arpeggiocunmap  call arpeggio#_unmap('c', <q-args>)
-command! -bar -nargs=* Arpeggioiunmap  call arpeggio#_unmap('i', <q-args>)
-command! -bar -nargs=* Arpeggiolunmap  call arpeggio#_unmap('l', <q-args>)
-command! -bar -nargs=* Arpeggionunmap  call arpeggio#_unmap('n', <q-args>)
-command! -bar -nargs=* Arpeggioounmap  call arpeggio#_unmap('o', <q-args>)
-command! -bar -nargs=* Arpeggiosunmap  call arpeggio#_unmap('s', <q-args>)
-command! -bar -nargs=* Arpeggiovunmap  call arpeggio#_unmap('v', <q-args>)
-command! -bar -nargs=* Arpeggioxunmap  call arpeggio#_unmap('x', <q-args>)
+call s:_('-bang', 'map', "(<bang>0 ? 'ic' : 'nvo')", 1)
+call s:_('', 'cmap', '"c"', 1)
+call s:_('', 'imap', '"i"', 1)
+call s:_('', 'lmap', '"l"', 1)
+call s:_('', 'nmap', '"n"', 1)
+call s:_('', 'omap', '"o"', 1)
+call s:_('', 'smap', '"s"', 1)
+call s:_('', 'vmap', '"v"', 1)
+call s:_('', 'xmap', '"x"', 1)
+
+call s:_('-bang', 'noremap', "(<bang>0 ? 'ic' : 'nvo')", 1)
+call s:_('', 'cnoremap', '"c"', 1)
+call s:_('', 'inoremap', '"i"', 1)
+call s:_('', 'lnoremap', '"l"', 1)
+call s:_('', 'nnoremap', '"n"', 1)
+call s:_('', 'onoremap', '"o"', 1)
+call s:_('', 'snoremap', '"s"', 1)
+call s:_('', 'vnoremap', '"v"', 1)
+call s:_('', 'xnoremap', '"x"', 1)
+
+
+function! s:_(...)
+  execute call('printf',
+  \            ['command! %s -bar -nargs=* Arpeggio%s'
+  \             . '  call arpeggio#_unmap(%s, <q-args>)']
+  \            + a:000)
+endfunction
+
+call s:_('-bang', 'unmap', "(<bang>0 ? 'ic' : 'nvo')")
+call s:_('', 'cunmap', '"c"')
+call s:_('', 'iunmap', '"i"')
+call s:_('', 'lunmap', '"l"')
+call s:_('', 'nunmap', '"n"')
+call s:_('', 'ounmap', '"o"')
+call s:_('', 'sunmap', '"s"')
+call s:_('', 'vunmap', '"v"')
+call s:_('', 'xunmap', '"x"')
 
 
 
