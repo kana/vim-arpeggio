@@ -36,6 +36,8 @@ endif
 
 
 
+command! -nargs=+ Arpeggio  call arpeggio#_do(<q-args>)
+
 command! -bang -nargs=* Arpeggiomap
 \        call arpeggio#_map_or_list(<bang>0 ? 'ic' : 'nvo', 1, <q-args>)
 command! -nargs=* Arpeggiocmap  call arpeggio#_map_or_list('c', 1, <q-args>)

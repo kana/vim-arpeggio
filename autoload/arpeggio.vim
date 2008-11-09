@@ -126,6 +126,15 @@ endfunction
 
 
 " Core  "{{{1
+function! arpeggio#_do(script)  "{{{2
+  let _ = split(substitute(a:script, '^\s\+', '', ''), '^\S\+\zs')
+  execute 'Arpeggio'._[0] join(_[1:], '')
+  return
+endfunction
+
+
+
+
 function! arpeggio#_map_or_list(modes, remap_p, q_args)  "{{{2
   let [options, lhs, rhs] = s:parse_args(a:q_args)
   if rhs isnot 0
