@@ -296,6 +296,7 @@ CHANGELOG					*arpeggio-changelog*
 	  already mapped to something other than a part of another
 	  |arpeggio-key-mapping|.
 	- Add custom 'timeoutlen' per key.  See |g:arpeggio_timeoutlens|.
+	- Add a bit of completion for |arpeggio-commands|.
 
 0.0.2	2008-11-07T22:16:51+09:00
 	- Fix |:Arpeggionoremap| that allowed remapping but it should not do

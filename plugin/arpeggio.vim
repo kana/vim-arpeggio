@@ -39,12 +39,12 @@ endif
 
 
 
-command! -bar -nargs=+ Arpeggio  call arpeggio#_do(<q-args>)
+command! -bar -complete=command -nargs=+ Arpeggio  call arpeggio#_do(<q-args>)
 
 
 function! s:_(...)
   execute call('printf',
-  \            ['command! %s -bar -nargs=* Arpeggio%s'
+  \            ['command! %s -bar -complete=mapping -nargs=* Arpeggio%s'
   \             . '  call arpeggio#_map_or_list(%s, %s, <q-args>)']
   \            + a:000)
 endfunction
@@ -72,7 +72,7 @@ call s:_('', 'xnoremap', '"x"', 1)
 
 function! s:_(...)
   execute call('printf',
-  \            ['command! %s -bar -nargs=* Arpeggio%s'
+  \            ['command! %s -bar -complete=mapping -nargs=* Arpeggio%s'
   \             . '  call arpeggio#_unmap(%s, <q-args>)']
   \            + a:000)
 endfunction
