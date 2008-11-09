@@ -289,6 +289,9 @@ BUGS						*arpeggio-bugs*
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
 
+0.0.4	2008-11-10T02:38:07+09:00
+	- Add syntax highlighting for |arpeggio-commands|.
+
 0.0.3	2008-11-09T10:37:46+09:00
 	- Add |:Arpeggio|.
 	- Support |:map-<unique>| for |arpeggio#map()| and other commands.
