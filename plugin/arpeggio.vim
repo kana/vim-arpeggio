@@ -32,6 +32,9 @@ endif
 if !exists('g:arpeggio_timeoutlen')
   let g:arpeggio_timeoutlen = 40
 endif
+if !exists('g:arpeggio_timeoutlens')
+  let g:arpeggio_timeoutlens = {}
+endif
 
 
 

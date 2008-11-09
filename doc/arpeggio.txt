@@ -53,12 +53,16 @@ With the above definition, you can input <Esc> in Insert mode and Command-line
 mode by pressing "j" and "k" simultaneously, while solely pressed "j" are "k"
 are worked the same as the default ones.
 
-The concept of this plugin is derived from Emacs' key-chord.el (*), but there
-is the following difference:
+The concept of this plugin is derived from Emacs' key-chord.el (*1), but there
+are the following differences:
 
 - Number of keys to be simultaneously pressed is unlimited.
 
-(*) http://www.emacswiki.org/cgi-bin/wiki/key-chord.el
+- Custom delay for each key is supported (see |g:arpeggio_timeoutlens|).
+  This is a generalization of space-chord.el (*2).
+
+(*1) http://www.emacswiki.org/emacs/key-chord.el
+(*2) http://www.emacswiki.org/emacs/space-chord.el
 
 
 Requirements:
@@ -238,6 +242,12 @@ g:arpeggio_timeoutlen	number  (default 40)	*g:arpeggio_timeoutlen*
 			The time in milliseconds to determine whether typed
 			keys are simultaneously pressed or not.
 
+g:arpeggio_timeoutlens	Dictionary (default {})	*g:arpeggio_timeoutlens*
+			Each key (in this dictionary) is a string of a key (on
+			a keyboard), and each value is a number which means
+			the same as |g:arpeggio_timeoutlen| but it is used
+			only for the corresponding key.
+
 'timeout' 'ttimeout'
 			The following configuration is required to use this
 			plugin:
@@ -285,6 +295,7 @@ CHANGELOG					*arpeggio-changelog*
 	- In |arpeggio#map()| and other commands, warn if a key in {lhs} is
 	  already mapped to something other than a part of another
 	  |arpeggio-key-mapping|.
+	- Add custom 'timeoutlen' per key.  See |g:arpeggio_timeoutlens|.
 
 0.0.2	2008-11-07T22:16:51+09:00
 	- Fix |:Arpeggionoremap| that allowed remapping but it should not do

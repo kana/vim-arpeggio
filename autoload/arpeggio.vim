@@ -164,7 +164,7 @@ endfunction
 
 
 function! s:chord_key(key)  "{{{2
-  call s:set_up_options()
+  call s:set_up_options(a:key)
   return s:SID . 'work:' . a:key  " <SID>work:...
 endfunction
 
@@ -356,12 +356,12 @@ endfunction
 
 
 
-function! s:set_up_options()  "{{{2
+function! s:set_up_options(key)  "{{{2
   let s:original_showcmd = &showcmd
   let s:original_timeoutlen = &timeoutlen
 
   set noshowcmd  " To avoid flickering in the bottom line.
-  let &timeoutlen = g:arpeggio_timeoutlen
+  let &timeoutlen = get(g:arpeggio_timeoutlens, a:key, g:arpeggio_timeoutlen)
   return
 endfunction
 
