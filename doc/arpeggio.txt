@@ -291,6 +291,9 @@ CHANGELOG					*arpeggio-changelog*
 
 0.0.4	2008-11-10T02:38:07+09:00
 	- Add syntax highlighting for |arpeggio-commands|.
+	- Fix bugs of "noremap" version of |arpeggio-commands| such as
+	  |:Arpeggionoremap| that {rhs} are remapped despite the meaning of
+	  the commands.  (Thanks for id:ampmmn)
 
 0.0.3	2008-11-09T10:37:46+09:00
 	- Add |:Arpeggio|.
