@@ -283,6 +283,9 @@ CHANGELOG					*arpeggio-changelog*
 	- Remove the assumption on 'timeout' and 'ttimeout'.  Old version
 	  assumes that "set timeout notimeout", but now their values can be
 	  arbitrary.
+	- Fix the bug that 'ttimeoutlen' can be interpreted as an unexpected
+	  value because of the adjustment of 'timeout' and 'timeoutlen' for
+	  arpeggio key mappings.
 
 0.0.4	2008-11-10T02:38:07+09:00
 	- Add syntax highlighting for |arpeggio-commands|.
