@@ -248,16 +248,6 @@ g:arpeggio_timeoutlens	Dictionary (default {})	*g:arpeggio_timeoutlens*
 			the same as |g:arpeggio_timeoutlen| but it is used
 			only for the corresponding key.
 
-'timeout' 'ttimeout'
-			The following configuration is required to use this
-			plugin:
->
-				set timeout
-				set nottimeout
-<
-			Note that the default values of these options are the
-			same as the above, so you don't have to configure them
-			unless you tweaked them.
 
 
 
@@ -288,6 +278,11 @@ BUGS						*arpeggio-bugs*
 
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
+
+0.0.5	2008-11-19T23:11:31+09:00
+	- Remove the assumption on 'timeout' and 'ttimeout'.  Old version
+	  assumes that "set timeout notimeout", but now their values can be
+	  arbitrary.
 
 0.0.4	2008-11-10T02:38:07+09:00
 	- Add syntax highlighting for |arpeggio-commands|.

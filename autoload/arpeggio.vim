@@ -64,6 +64,7 @@
 
 " See s:set_up_options() and s:restore_options().
 let s:original_showcmd = &showcmd
+let s:original_timeout = &timeout
 let s:original_timeoutlen = &timeoutlen
 
 
@@ -349,6 +350,7 @@ endfunction
 
 function! s:restore_options()  "{{{2
   let &showcmd = s:original_showcmd
+  let &timeout = s:original_timeout
   let &timeoutlen = s:original_timeoutlen
   return
 endfunction
@@ -358,9 +360,11 @@ endfunction
 
 function! s:set_up_options(key)  "{{{2
   let s:original_showcmd = &showcmd
+  let s:original_timeout = &timeout
   let s:original_timeoutlen = &timeoutlen
 
   set noshowcmd  " To avoid flickering in the bottom line.
+  set timeout  " To ensure time out on :mappings
   let &timeoutlen = get(g:arpeggio_timeoutlens, a:key, g:arpeggio_timeoutlen)
   return
 endfunction
