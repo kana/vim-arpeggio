@@ -269,8 +269,6 @@ BUGS						*arpeggio-bugs*
   information about typing delay for each key.  So some keys may be treated as
   an arpeggio key mapping unexpectedly.
 
-- Feature idea: 'timeoutlen' per key.
-
 - There are many bugs around the world.
 
 
