@@ -234,7 +234,10 @@ endfunction
 
 
 function! s:do_unmap(mode, options, keys)  "{{{2
-  " FIXME: How about temporary key mappings "<SID>work:"?
+  " FIXME: Mediate key mappings "<SID>work:" should be removed.
+  "        But they may be used by other arpeggio key mappings and it's hard
+  "        to determine whether a given mediate key mappng is still used or
+  "        not in fast and exact way.  So that they aren't removed currently.
   let opt_buffer = a:options =~# 'b' ? '<buffer>' : ''
 
   for key in a:keys
