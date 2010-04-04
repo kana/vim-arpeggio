@@ -197,7 +197,7 @@ function! s:do_map(mode, options, remap_p, keys, rhs)  "{{{2
     endif
   endfor
   if a:options =~# 'u' && already_mapped_p
-    echoer 'Abort to map because of the above reason'
+    echoerr 'Abort to map because of the above reason'
     return
   endif
 
