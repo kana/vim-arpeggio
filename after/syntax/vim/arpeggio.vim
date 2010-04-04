@@ -37,7 +37,7 @@ syntax match vimArpeggioCommand
 
 
 
-highlight default link vimArpeggioCommand  NONE
+highlight default link vimArpeggioCommand  vimCommand
 
 " __END__
 " vim: foldmethod=marker
