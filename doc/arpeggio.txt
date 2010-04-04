@@ -1,4 +1,4 @@
-*arpeggio.txt*	Mappings for simultaneously pressed keys
+*arpeggio.txt*	Key mappings for simultaneously pressed keys
 
 Version @@VERSION@@
 Script ID: 2425
@@ -41,17 +41,18 @@ Changelog		|arpeggio-changelog|
 ==============================================================================
 INTRODUCTION					*arpeggio-introduction*
 
-*arpeggio* is a Vim plugin to define another type of |key-mapping| called as
-*arpeggio-key-mapping* which consists of 2 or more keys and it will be mapped
-to a key sequence whenever all keys are simultaneously pressed.  For example:
+*arpeggio* is a Vim plugin to define another type of |key-mapping| called
+*arpeggio-key-mapping* -- it consists of 2 or more keys ({lhs}) and it will be
+expanded to another key sequence ({rhs}) whenever all keys in {lhs} are
+simultaneously pressed.  For example:
 >
-	Arpeggionoremap! jk  <Esc>
+	Arpeggio inoremap jk  <Esc>
 	" OR
-	call arpeggio#map('ic', '', 0, 'jk', '<Esc>')
+	call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 <
-With the above definition, you can input <Esc> in Insert mode and Command-line
-mode by pressing "j" and "k" simultaneously, while solely pressed "j" are "k"
-are worked the same as the default ones.
+With the above definition, you can input <Esc> in Insert mode by pressing "j"
+and "k" simultaneously, while you can move the cursor by pressing "j" or "k"
+solely.
 
 The concept of this plugin is derived from Emacs' key-chord.el (*1), but there
 are the following differences:
@@ -203,9 +204,9 @@ arpeggio#map({modes}, {options}, {remap-p}, {lhs}, {rhs})
 				  aborted.
 
 			{remap-p}
-				Number as a boolean.  True means that rhs can
-				be remapped, false means remapping is not
-				allowed.
+				Number as a boolean.  True means that {rhs}
+				will be remapped, and false means that {rhs}
+				will not be remapped.
 
 			{lhs}
 				String.  This value must contain two or more
@@ -271,8 +272,6 @@ BUGS						*arpeggio-bugs*
   and/or |key-mapping|.  Because recorded key sequence doesn't have any
   information about typing delay for each key.  So some keys may be treated as
   an arpeggio key mapping unexpectedly.
-
-- There are many bugs around the world.
 
 
 
