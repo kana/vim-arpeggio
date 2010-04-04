@@ -28,22 +28,16 @@ syntax keyword vimArpeggioCommand
 
 syntax match vimArpeggioCommand
 \      /\<Arpeggio[cilnosvx]\(\|nore\|un\)map\>/
-\      contains=vimArpeggioCommandInside
 \      skipwhite nextgroup=vimMapBang,vimMapMod,vimMapLhs
 
 syntax match vimArpeggioCommand
 \      /\<Arpeggio\%(\|nore\|un\)map\>!\?/
-\      contains=vimArpeggioCommandInside
 \      skipwhite nextgroup=vimMapMod,vimMapLhs
-
-syntax match vimArpeggioCommandInside /\<Arpeggio\zs\l*map!\?/
-\      contained
 
 
 
 
 highlight default link vimArpeggioCommand  NONE
-highlight default link vimArpeggioCommandInside  vimCommand
 
 " __END__
 " vim: foldmethod=marker
