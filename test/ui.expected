@@ -1,0 +1,18 @@
+==== Arpeggio 
+---- It should define key mappings properly. 
+........x..
+
+
+
+**** Result ****
+
+
+In Arpeggio 
+
+It should define key mappings properly.
+FAILED: getline('.') ==# 'rhs1"rhs2'
+  expected: 'rhs1"rhs2'
+       got: 'rhs1'
+
+
+11 examples, 1 failures
