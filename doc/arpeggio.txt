@@ -273,6 +273,25 @@ BUGS						*arpeggio-bugs*
   information about typing delay for each key.  So some keys may be treated as
   an arpeggio key mapping unexpectedly.
 
+- |arpeggio-key-mapping| does not support <SID> in {rhs}.  For example, the
+  following mappings are not expanded to call the script-local function:
+>
+	function! s:Foo()
+	  return 'bar'
+	endfunction
+	Arpeggio inoremap xy  <C-r>=<SID>Foo()<CR>
+<
+  Though it might be possible to support <SID> without any special treatment,
+  it is a hard work.  If you really want to use script-local stuffs from
+  arpeggio key mappings, please use the following workaround:
+>
+	function! s:Foo()
+	  return 'bar'
+	endfunction
+	inoremap <Plug>Foo  <C-r>=<SID>Foo()<CR>
+	Arpeggio imap xy  <Plug>Foo
+<
+
 
 
 
