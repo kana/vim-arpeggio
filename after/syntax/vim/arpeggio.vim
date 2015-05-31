@@ -27,7 +27,7 @@ syntax keyword vimArpeggioCommand
 \      skipwhite nextgroup=vimMap
 
 syntax match vimArpeggioCommand
-\      /\<Arpeggio[cilnosvx]\(\|nore\|un\)map\>/
+\      /\<Arpeggio[tcilnosvx]\(\|nore\|un\)map\>/
 \      skipwhite nextgroup=vimMapBang,vimMapMod,vimMapLhs
 
 syntax match vimArpeggioCommand
