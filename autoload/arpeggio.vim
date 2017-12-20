@@ -414,6 +414,7 @@ endfunction
 function! s:unescape_lhs(escaped_lhs)  "{{{2
   let keys = s:split_to_keys(a:escaped_lhs)
   call map(keys, 'v:val =~ "^<.*>$" ? eval(''"\'' . v:val . ''"'') : v:val')
+  call map(keys, 'v:val == "|" ? "<Bar>" : v:val')
   return join(keys, '')
 endfunction
 
