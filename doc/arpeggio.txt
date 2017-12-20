@@ -1,9 +1,9 @@
 *arpeggio.txt*	Key mappings for simultaneously pressed keys
 
-Version @@VERSION@@
+Version 0.0.7
 Script ID: 2425
-Copyright (C) 2008-2010 kana <http://whileimautomaton.net/>
-License: So-called MIT/X license  {{{
+Copyright (C) 2008-2017 Kana Natsuno <http://whileimautomaton.net/>
+License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
     "Software"), to deal in the Software without restriction, including
@@ -70,10 +70,7 @@ Requirements:
 - Vim 7.2 or later
 
 Latest version:
-http://github.com/kana/vim-arpeggio
-
-Document in HTML format:
-http://kana.github.com/config/vim/arpeggio.html
+https://github.com/kana/vim-arpeggio
 
 
 
@@ -297,6 +294,10 @@ BUGS						*arpeggio-bugs*
 
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
+
+0.0.7	2017-12-20T21:11:47+09:00		*arpeggio-changelog-0.0.7*
+        - Fix a bug that key mappings which contain <Bar> in {lhs} cannot be
+          defined.  For example `Arpeggio map }<Bar> xxx` did not work.
 
 0.0.6	2010-04-20T12:24:42+09:00		*arpeggio-changelog-0.0.6*
 	- Fix |arpeggio-commands| to behave the same as |:map| commands.  In
