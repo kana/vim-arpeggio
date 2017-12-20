@@ -1,6 +1,6 @@
 *arpeggio.txt*	Key mappings for simultaneously pressed keys
 
-Version @@VERSION@@
+Version 0.0.7
 Script ID: 2425
 Copyright (C) 2008-2010 kana <http://whileimautomaton.net/>
 License: So-called MIT/X license  {{{
