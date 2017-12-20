@@ -295,6 +295,10 @@ BUGS						*arpeggio-bugs*
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
 
+0.0.7	2017-12-20T21:11:47+09:00		*arpeggio-changelog-0.0.7*
+        - Fix a bug that key mappings which contain <Bar> in {lhs} cannot be
+          defined.  For example `Arpeggio map }<Bar> xxx` did not work.
+
 0.0.6	2010-04-20T12:24:42+09:00		*arpeggio-changelog-0.0.6*
 	- Fix |arpeggio-commands| to behave the same as |:map| commands.  In
 	  other words, " and keys after " in {rhs} for |arpeggio-commands| are
