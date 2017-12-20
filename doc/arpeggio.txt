@@ -70,10 +70,7 @@ Requirements:
 - Vim 7.2 or later
 
 Latest version:
-http://github.com/kana/vim-arpeggio
-
-Document in HTML format:
-http://kana.github.com/config/vim/arpeggio.html
+https://github.com/kana/vim-arpeggio
 
 
 
