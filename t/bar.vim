@@ -11,7 +11,7 @@ describe ':Arpeggio'
 
   it 'defines key mappings which contains <Bar> in their {lhs}'
     let v:errmsg = ''
-    silent! execute 'Arpeggio nnoremap }<Bar>  Ifoo<Esc>'
+    silent! execute 'Arpeggio nnoremap <buffer> }<Bar>  Ifoo<Esc>'
     Expect v:errmsg ==# ''
 
     put ='xyz'
