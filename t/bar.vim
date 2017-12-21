@@ -11,7 +11,7 @@ describe ':Arpeggio'
 
   it 'defines key mappings which contains <Bar> in their {lhs}'
     let v:errmsg = ''
-    silent! execute 'Arpeggio nnoremap }<Bar>  Ifoo<Esc>'
+    silent! execute 'Arpeggio nnoremap <buffer> }<Bar>  Ifoo<Esc>'
     Expect v:errmsg ==# ''
 
     put ='xyz'
@@ -30,5 +30,26 @@ describe ':Arpeggio'
     Expect [line('.'), col('.'), getline('.')] ==# [3, 6, 'foozzy']
     execute 'normal 3|'
     Expect [line('.'), col('.'), getline('.')] ==# [3, 3, 'foozzy']
+  end
+
+  it 'defines Insert mode key mappings with <Bar>'
+    let v:errmsg = ''
+    silent! execute 'Arpeggio inoremap <buffer> }<Bar>  xyzzy'
+    Expect v:errmsg ==# ''
+
+    put ='abc'
+    Expect getline('.') ==# 'abc'
+    execute "normal i}|\<Esc>"
+    Expect getline('.') ==# 'xyzzyabc'
+
+    put ='def'
+    Expect getline('.') ==# 'def'
+    execute "normal i}\<Esc>"
+    Expect getline('.') ==# '}def'
+
+    put ='ghi'
+    Expect getline('.') ==# 'ghi'
+    execute "normal i|\<Esc>"
+    Expect getline('.') ==# '|ghi'
   end
 end
