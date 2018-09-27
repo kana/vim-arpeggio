@@ -15,9 +15,8 @@ describe ':Arpeggio'
     silent! execute 'Arpeggio inoremap <buffer> <Bar>1  xyzzy'
     redir END
     Expect strtrans(warnmsg) !~# 'is already mapped in mode'
-    Expect v:errmsg ==# ''
+    Expect v:errmsg !~# 'is already mapped in mode'
 
-    let v:errmsg = ''
     redir => warnmsg
     silent! execute 'Arpeggio inoremap <buffer> <Bar>1  xyzzy'
     redir END
@@ -52,6 +51,6 @@ describe ':Arpeggio'
     silent! execute 'Arpeggio inoremap <buffer> <lt>3  xyzzy'
     redir END
     Expect strtrans(warnmsg) !~# 'is already mapped in mode'
-    Expect v:errmsg ==# ''
+    Expect v:errmsg !~# 'is already mapped in mode'
   end
 end
