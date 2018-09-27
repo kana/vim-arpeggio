@@ -1,8 +1,8 @@
 *arpeggio.txt*	Key mappings for simultaneously pressed keys
 
-Version 0.0.7
+Version 0.0.8
 Script ID: 2425
-Copyright (C) 2008-2017 Kana Natsuno <http://whileimautomaton.net/>
+Copyright (C) 2008-2018 Kana Natsuno <http://whileimautomaton.net/>
 License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -294,6 +294,11 @@ BUGS						*arpeggio-bugs*
 
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
+
+0.0.8	2018-09-27T20:35:53+09:00		*arpeggio-changelog-0.0.8*
+        - Fix a bug that a wrong warning message is shown whenever arpeggio
+          key mappings which contain <Bar>, <Bslash> and/or <lt> in {lhs} are
+          redefined.
 
 0.0.7	2017-12-20T21:11:47+09:00		*arpeggio-changelog-0.0.7*
         - Fix a bug that key mappings which contain <Bar> in {lhs} cannot be
