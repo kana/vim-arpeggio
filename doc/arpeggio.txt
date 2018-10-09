@@ -1,8 +1,8 @@
 *arpeggio.txt*	Key mappings for simultaneously pressed keys
 
-Version 0.0.8
+Version 0.0.9
 Script ID: 2425
-Copyright (C) 2008-2018 Kana Natsuno <http://whileimautomaton.net/>
+Copyright (C) 2008-2018 Kana Natsuno <https://whileimautomaton.net/>
 License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -64,6 +64,26 @@ are the following differences:
 
 (*1) http://www.emacswiki.org/emacs/key-chord.el
 (*2) http://www.emacswiki.org/emacs/space-chord.el
+
+                                                *arpeggio-installation*
+To define arpeggio key mappoings in |vimrc|, you have to add one of the
+following extra lines into vimrc before any definitions:
+
+(a) If you use Vim 8 or later, and you installed this plugin as |packages|:
+>
+        " Load this plugin at this timing
+        " to define :Arpeggio, arpeggio#map() and others used later.
+        packadd vim-arpeggio
+<
+(b) Like (a), but you have more plugins to be loaded earlier:
+>
+        packloadall
+<
+(c) If you use Vim 7 or older, or you install this plugin as the traditional
+style (i.e. you don't install this plugin as a package):
+>
+        call arpeggio#load()
+<
 
 
 Requirements:
@@ -160,6 +180,7 @@ arpeggio#load()					*arpeggio#load()*
 			does nothing.  Call this function to ensure that
 			|arpeggio-commands| are defined before you use one of
 			them, especially, in your |vimrc|.
+                        See also |arpeggio-installation|.
 
 						*arpeggio#map()*
 arpeggio#map({modes}, {options}, {remap-p}, {lhs}, {rhs})
@@ -294,6 +315,10 @@ BUGS						*arpeggio-bugs*
 
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
+
+0.0.9	2018-10-09T19:26:34+09:00		*arpeggio-changelog-0.0.9*
+        - Update the documentation about how to define arpeggio key mappings
+          in vimrc for Vim 8.  See |arpeggio-installation| for the details.
 
 0.0.8	2018-09-27T20:35:53+09:00		*arpeggio-changelog-0.0.8*
         - Fix a bug that a wrong warning message is shown whenever arpeggio
