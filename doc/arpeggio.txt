@@ -65,6 +65,26 @@ are the following differences:
 (*1) http://www.emacswiki.org/emacs/key-chord.el
 (*2) http://www.emacswiki.org/emacs/space-chord.el
 
+                                                *arpeggio-installation*
+To define arpeggio key mappoings in |vimrc|, you have to add one of the
+following extra lines into vimrc before any definitions:
+
+(a) If you use Vim 8 or later, and you installed this plugin as |packages|:
+>
+        " Load this plugin at this timing
+        " to define :Arpeggio, arpeggio#map() and others used later.
+        packadd vim-arpeggio
+<
+(b) Like (a), but you have more plugins to be loaded earlier:
+>
+        packloadall
+<
+(c) If you use Vim 7 or older, or you install this plugin as the traditional
+style (i.e. you don't install this plugin as a package):
+>
+        call arpeggio#load()
+<
+
 
 Requirements:
 - Vim 7.2 or later
@@ -160,6 +180,7 @@ arpeggio#load()					*arpeggio#load()*
 			does nothing.  Call this function to ensure that
 			|arpeggio-commands| are defined before you use one of
 			them, especially, in your |vimrc|.
+                        See also |arpeggio-installation|.
 
 						*arpeggio#map()*
 arpeggio#map({modes}, {options}, {remap-p}, {lhs}, {rhs})
