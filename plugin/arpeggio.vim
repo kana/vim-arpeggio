@@ -1,5 +1,5 @@
 " arpeggio - Mappings for simultaneously pressed keys
-" Version: 0.0.8
+" Version: 0.0.9
 " Copyright (C) 2008-2018 Kana Natsuno <https://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
