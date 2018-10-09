@@ -316,6 +316,10 @@ BUGS						*arpeggio-bugs*
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
 
+0.0.9	2018-10-09T19:26:34+09:00		*arpeggio-changelog-0.0.9*
+        - Update the documentation about how to define arpeggio key mappings
+          in vimrc for Vim 8.  See |arpeggio-installation| for the details.
+
 0.0.8	2018-09-27T20:35:53+09:00		*arpeggio-changelog-0.0.8*
         - Fix a bug that a wrong warning message is shown whenever arpeggio
           key mappings which contain <Bar>, <Bslash> and/or <lt> in {lhs} are
