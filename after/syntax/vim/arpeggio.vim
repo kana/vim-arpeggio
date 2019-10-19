@@ -1,6 +1,6 @@
 " Vim additional syntax: vim/arpeggio - highlight :Arpeggio commands
 " Version: 0.0.9
-" Copyright (C) 2008-2018 Kana Natsuno <https://whileimautomaton.net/>
+" Copyright (C) 2008-2019 Kana Natsuno <https://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
