@@ -281,13 +281,17 @@ endfunction
 function! s:normalize_key_for_rhs(s)  "{{{2
   " {rhs} of key mappings is "normalized" in Vim.
   " So that some keys must be "normalized" to compare with maparg() result.
-  return get(s:NORMALIZED_KEY_FOR_RHS_TABLE, tolower(a:s), a:s)
+  let s = a:s ==? '<leader>' ? get(g:, 'mapleader', '\') :
+  \       a:s ==? '<localleader>' ? get(g:, 'maplocalleader', '\') :
+  \       a:s
+  return get(s:NORMALIZED_KEY_FOR_RHS_TABLE, tolower(s), s)
 endfunction
 
 let s:NORMALIZED_KEY_FOR_RHS_TABLE = {
 \   '<bar>': '|',
 \   '<bslash>': '\',
 \   '<lt>': '<',
+\   '<space>': ' ',
 \ }
 
 
