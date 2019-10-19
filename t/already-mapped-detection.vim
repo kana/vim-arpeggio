@@ -47,5 +47,15 @@ describe ':Arpeggio'
       call s:test('', '<lt>1', v:false)
       call s:test('', '<lt>1', v:false)
     end
+
+    it 'does not warn for <Leader>'
+      call s:test('', '<Leader>1', v:false)
+      call s:test('', '<Leader>1', v:false)
+    end
+
+    it 'does not warn for <LocalLeader>'
+      call s:test('', '<LocalLeader>1', v:false)
+      call s:test('', '<LocalLeader>1', v:false)
+    end
   end
 end
