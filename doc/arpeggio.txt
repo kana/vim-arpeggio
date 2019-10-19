@@ -1,8 +1,8 @@
 *arpeggio.txt*	Key mappings for simultaneously pressed keys
 
-Version 0.0.9
+Version 0.0.10
 Script ID: 2425
-Copyright (C) 2008-2018 Kana Natsuno <https://whileimautomaton.net/>
+Copyright (C) 2008-2019 Kana Natsuno <https://whileimautomaton.net/>
 License: MIT license  {{{
     Permission is hereby granted, free of charge, to any person obtaining
     a copy of this software and associated documentation files (the
@@ -315,6 +315,11 @@ BUGS						*arpeggio-bugs*
 
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
+
+0.0.10	2019-10-20T04:43:52+09:00		*arpeggio-changelog-0.0.10*
+        - Fix a bug that shows a false warning message when two or more
+          arpeggio key mappings which contain <Leader>, <LocalLeader> and/or
+          <Space> in {lhs} are defined.
 
 0.0.9	2018-10-09T19:26:34+09:00		*arpeggio-changelog-0.0.9*
         - Update the documentation about how to define arpeggio key mappings
