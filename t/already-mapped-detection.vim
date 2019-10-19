@@ -57,5 +57,10 @@ describe ':Arpeggio'
       call s:test('', '<LocalLeader>1', v:false)
       call s:test('', '<LocalLeader>1', v:false)
     end
+
+    it 'does not warn for <Space>'
+      call s:test('', '<Space>1', v:false)
+      call s:test('', '<Space>1', v:false)
+    end
   end
 end

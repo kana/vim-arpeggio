@@ -291,6 +291,7 @@ let s:NORMALIZED_KEY_FOR_RHS_TABLE = {
 \   '<bar>': '|',
 \   '<bslash>': '\',
 \   '<lt>': '<',
+\   '<space>': ' ',
 \ }
 
 
