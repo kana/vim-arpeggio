@@ -1,5 +1,5 @@
 " Vim additional syntax: vim/arpeggio - highlight :Arpeggio commands
-" Version: 0.0.9
+" Version: 0.0.10
 " Copyright (C) 2008-2019 Kana Natsuno <https://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
