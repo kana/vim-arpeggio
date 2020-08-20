@@ -316,6 +316,9 @@ BUGS						*arpeggio-bugs*
 ==============================================================================
 CHANGELOG					*arpeggio-changelog*
 
+0.0.11	2020-08-20T09:24:34+09:00		*arpeggio-changelog-0.0.11*
+        - Fix to be compatible with Vim 8.2.1297 or later.
+
 0.0.10	2019-10-20T04:43:52+09:00		*arpeggio-changelog-0.0.10*
         - Fix a bug that shows a false warning message when two or more
           arpeggio key mappings which contain <Leader>, <LocalLeader> and/or
