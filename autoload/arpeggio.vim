@@ -264,7 +264,7 @@ endfunction
 
 " Misc.  "{{{1
 function! s:SID()  "{{{2
-  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_')
+  return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze_SID$')
 endfunction
 let s:SID = "\<SNR>" . s:SID() . '_'
 
