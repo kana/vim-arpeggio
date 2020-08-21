@@ -58,6 +58,7 @@ call s:_('', 'omap', '"o"', 1)
 call s:_('', 'smap', '"s"', 1)
 call s:_('', 'vmap', '"v"', 1)
 call s:_('', 'xmap', '"x"', 1)
+call s:_('', 'tmap', '"t"', 1)
 
 call s:_('-bang', 'noremap', "(<bang>0 ? 'ic' : 'nvo')", 0)
 call s:_('', 'cnoremap', '"c"', 0)
@@ -68,6 +69,7 @@ call s:_('', 'onoremap', '"o"', 0)
 call s:_('', 'snoremap', '"s"', 0)
 call s:_('', 'vnoremap', '"v"', 0)
 call s:_('', 'xnoremap', '"x"', 0)
+call s:_('', 'tnoremap', '"t"', 0)
 
 
 function! s:_(...)
@@ -86,6 +88,7 @@ call s:_('', 'ounmap', '"o"')
 call s:_('', 'sunmap', '"s"')
 call s:_('', 'vunmap', '"v"')
 call s:_('', 'xunmap', '"x"')
+call s:_('', 'tunmap', '"t"')
 
 
 
